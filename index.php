@@ -6,6 +6,12 @@
   $interships = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
+<?php
+  $sql = 'SELECT name FROM tags';
+  $result = mysqli_query($conn, $sql);
+  $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+
 
   <main>
     <section class="content-container">
@@ -13,54 +19,12 @@
       <p>Choose areas you want to work in/with:</p>
       <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
         <div class="hashtag-options">
-          <label for="php" class="hashtag-option">
-            <input type="checkbox" name="php" id="php">
-            PHP
-          </label>
-          <label for="java" class="hashtag-option">
-            <input type="checkbox" name="Java" id="java">
-            Java
-          </label>
-          <label for="css" class="hashtag-option">
-            <input type="checkbox" name="CSS" id="css">
-            CSS
-          </label>
-          <label for="html" class="hashtag-option">
-            <input type="checkbox" name="HTML" id="html">
-            HTML
-          </label>
-          <label for="python" class="hashtag-option">
-            <input type="checkbox" name="python" id="python">
-            Python
-          </label>
-          <label for="cs" class="hashtag-option">
-            <input type="checkbox" name="cs" id="cs">
-            C#
-          </label>
-          <label for="js" class="hashtag-option">
-            <input type="checkbox" name="js" id="js">
-            JavaScript
-          </label>
-          <label for="react" class="hashtag-option">
-            <input type="checkbox" name="react" id="react">
-            React
-          </label>
-          <label for="nodejs" class="hashtag-option">
-            <input type="checkbox" name="nodejs" id="nodejs">
-            NodeJS
-          </label>
-          <label for="deno" class="hashtag-option">
-            <input type="checkbox" name="deno" id="deno">
-            Deno
-          </label>
-          <label for="mongodb" class="hashtag-option">
-            <input type="checkbox" name="mongodb" id="mongodb">
-            MongoDB
-          </label>
-          <label for="mysql" class="hashtag-option">
-            <input type="checkbox" name="mysql" id="mysql">
-            MySQL
-          </label>
+          <?php foreach($tags as $tag): ?>
+            <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
+              <input type="checkbox" name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
+              <?php echo $tag['name'] ?>
+            </label>
+          <?php endforeach; ?>
         </div>
         <button id="search-for-internships">Search for internships</button>
       </form>
