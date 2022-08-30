@@ -1,4 +1,7 @@
 # Practicle-IT-project-demo
+
+WORK IN PROGRESS...
+
 This is a demo for a project in "Praktisk IT-prosjekt"-course
 
 This project includes PHP, MySQL and CSS/HTML.
