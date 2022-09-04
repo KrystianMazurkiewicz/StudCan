@@ -1,8 +1,8 @@
 <?php 
   $host = '127.0.0.1';
-  $db = 'xxx';
-  $user = 'xxx';
-  $pass = 'xxx';
+  $db = 'internships';
+  $user = 'krosh';
+  $pass = 'krosh';
   $charset = 'utf8mb4';
 
   $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

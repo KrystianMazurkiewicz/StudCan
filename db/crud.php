@@ -8,7 +8,7 @@
 
     public function insert($fname, $lname) {
       try {
-        $sql = "INSERT INTO xxx VALUES (:fname, :lname);";
+        $sql = "INSERT INTO names(first_name, last_name) VALUES (:fname, :lname);";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':fname', $fname);
         $stmt->bindparam(':lname', $lname);
