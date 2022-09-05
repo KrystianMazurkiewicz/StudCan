@@ -1,8 +1,8 @@
-<?php include 'config/database.php'; ?> 
-
 <?php
+  include 'config/database.php';
   $title = 'abc';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $title ?></title>
   <link rel="stylesheet" href="styles/header.css">
-  <link rel="stylesheet" href="styles/index.css">
+  <?php include_once 'logic/stylesheets.php' ?>
 </head>
 
 <body>
