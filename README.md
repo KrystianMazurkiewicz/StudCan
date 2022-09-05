@@ -1,4 +1,4 @@
-# Practicle-IT-project-demo
+# Practical-IT-project-demo
 
 WORK IN PROGRESS...
 
