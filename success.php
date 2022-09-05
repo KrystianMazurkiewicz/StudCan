@@ -13,7 +13,6 @@
   } else {
     echo "didnt work";
   }
-  
 ?>
 
 <!DOCTYPE html>
