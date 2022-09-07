@@ -1,6 +1,6 @@
 <?php 
   $host = '127.0.0.1';
-  $db = 'internships';
+  $db = 'practicle_it_project';
   $user = 'krosh';
   $pass = 'krosh';
   $charset = 'utf8mb4';

@@ -1,4 +1,8 @@
-<?php include 'inc/header.php'; ?>
+<?php
+  $title = 'index';
+  $current_user = 'student';
+  include 'inc/header.php';
+?>
 
 <?php
   $sql = 'SELECT * FROM internships';
@@ -34,11 +38,11 @@
         <article class="firma-container">
           <div class="firma">
             <h2 class="title-for-job-description">
-              <?php echo $internship['job_title'] ?>
+              <?php echo $internship['post_title'] ?>
             </h2>
             <p class="job-description">
-              <?php echo $internship['job_description'] ?>
-              <?php if($internship['job_description'] == '') echo
+              <?php echo $internship['post_description'] ?>
+              <?php if($internship['post_description'] == '') echo
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?'; 
               ?>
             </p>
