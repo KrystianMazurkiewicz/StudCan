@@ -58,7 +58,10 @@
                 </div>
               </div>
             </div>
-            <button class="send-application" alt="Send application" type="submit" name="submit"></button>
+            <div class="button-container">
+              <button class="edit-button" type="submit" name="submit">Edit</button>
+              <button class="delete-button" alt="Send application">Delete</button>
+            </div>
           </form>
         </article>
         <?php endforeach; ?>
