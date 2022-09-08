@@ -61,6 +61,10 @@ h2.title-for-job-description {
   width: 96%;
 }
 
+.bottom-section > *:last-child {
+  margin-bottom: 20px;
+}
+
 .hashtags {
   width: 100%;
   padding-bottom: 8px;

@@ -20,7 +20,7 @@
 
   <main>
     <section class="content-container">
-      <h1>Create an internship</h1>
+      <h1>Create an Internship</h1>
       <form method="post" action="success.php">
         <label>
           Company name

@@ -13,10 +13,9 @@
   }
 ?>
 
-<?php echo $id ?>
   <main>
     <section class="content-container">
-      <h1>Create an internship</h1>
+      <h1>Edit Internship</h1>
       <form method="post" action="success_edit.php">
         <input type="hidden" name="id" value="<?php echo $id ?>">
         <label>

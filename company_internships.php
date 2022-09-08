@@ -14,7 +14,7 @@
   <main>
     <section class="content-container">
       <h1>Your Company's Internships</h1>
-      <p class="available-internships"><?php echo '2' // this should be dynamically coming from mysql, will be done in the future ?> interships available:</p>
+      <p class="available-internships">You have currently <?php echo '2' // this should be dynamically coming from mysql, will be done in the future ?> interships:</p>
       <section>
       <?php foreach($interships as $internship): ?>
         <?php if ($internship['co_name'] != 'Oslomet') continue ?>
@@ -55,6 +55,18 @@
                     </strong>
                     have applied
                   </div>
+                </div>
+                <div class="created-at">
+                  Created at:
+                  <strong>20. Feb 2022</strong>
+                </div>
+                <div class="last-updated">
+                  Last updated at:
+                  <strong>22. Feb 2022</strong>
+                </div>
+                <div class="post-status">
+                  Status:
+                  <strong>Being Reviewed</strong>
                 </div>
               </div>
             </div>
