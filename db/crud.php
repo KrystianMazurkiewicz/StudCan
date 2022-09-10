@@ -41,5 +41,18 @@
       }  
     }
 
+    public function delete($id) {
+      try {
+        $sql = "DELETE FROM `internships` WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+   }
+
   }
 ?>

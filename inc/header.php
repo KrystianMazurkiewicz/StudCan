@@ -24,23 +24,6 @@
         <p class="change-profile-info">Change profile info</p>
       </a>
       <?php include_once 'logic/main_nav.php' ?>
-
-      <!-- <ul>
-        <li class="active">
-          <a href="/">
-            <p class="nav-tag">
-              Available Interships
-            </p>
-          </a>
-        </li>
-        <li>
-          <a href="/">
-            <p class="nav-tag">
-              View Status
-            </p>
-          </a>
-        </li>
-      </ul> -->
       <a class="university-badge-container" href="https://www.oslomet.no/">
         <img aria-hidden="true" class="university-badge" src="https://fest-network.eu/wp-content/uploads/2019/05/Oslo-Met-300x300-e1561746604844.jpg" alt="">
       </a>

@@ -66,13 +66,15 @@
                 </div>
                 <div class="post-status">
                   Status:
-                  <strong>Being Reviewed</strong>
+                  <strong>Published To Students</strong>
                 </div>
               </div>
             </div>
             <div class="button-container">
               <button class="edit-button" type="submit" name="submit">Edit</button>
-              <button class="delete-button" alt="Send application">Delete</button>
+              <a onclick="return confirm('Are you sure you want to delete this post?')" href="delete_success.php?id=<?php echo $internship['id'] ?>">
+                <button class="delete-button" alt="Send application">Delete</button>
+              </a>
             </div>
           </form>
         </article>
