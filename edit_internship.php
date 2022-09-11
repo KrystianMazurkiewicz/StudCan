@@ -4,6 +4,8 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
     
+// make it so u get results from database and use get id
+
   if (isset($_POST['submit'])) {
     $id = $_POST['id'];
     $co_name = $_POST['co_name'];

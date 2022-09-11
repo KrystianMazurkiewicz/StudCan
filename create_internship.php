@@ -24,15 +24,15 @@
       <form method="post" action="success.php">
         <label>
           Company name
-          <input type="text" name="co_name" placeholder="Type in your company's name">
+          <input required type="text" name="co_name" placeholder="Type in your company's name">
         </label>
         <label>
           Title of the post
-          <input type="text" name="post_title" placeholder="Type in the title of this post">
+          <input required type="text" name="post_title" placeholder="Type in the title of this post">
         </label>
         <label>
           Description for the post
-          <textarea name="post_description" placeholder="Fill in description for the internship" cols="30" rows="10"></textarea>
+          <textarea required name="post_description" placeholder="Fill in description for the internship" cols="30" rows="10"></textarea>
         </label>
         <label>
           Link to the company's website
