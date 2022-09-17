@@ -52,7 +52,22 @@
         echo $e->getMessage();
         return false;
       }
-   }
+    }
+
+    public function getAllInternships() {
+      try {
+        $sql = "SELECT * FROM internships";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return true;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+   
 
   }
 ?>

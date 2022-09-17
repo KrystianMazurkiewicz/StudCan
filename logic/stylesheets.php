@@ -1,5 +1,5 @@
 <?php
-  if ($title == 'index') {
+  if ($title == 'index2') {
     echo '<link rel="stylesheet" href="styles/index.css">';
   }
   else if ($title == 'company_internships') {

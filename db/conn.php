@@ -1,14 +1,14 @@
 <?php 
-  $host = '127.0.0.1';
+  $dbhost = '127.0.0.1';
   $db = 'practicle_it_project';
-  $user = 'krosh';
-  $pass = 'krosh';
-  $charset = 'utf8mb4';
+  $dbuser = 'krosh';
+  $dbpass = 'krosh';
+  $dbcharset = 'utf8mb4';
 
-  $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+  $dsn = "mysql:host=$dbhost;dbname=$db;charset=$dbcharset";
 
   try {
-    $pdo = new PDO($dsn, $user, $pass);
+    $pdo = new PDO($dsn, $dbuser, $dbpass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
   } catch (PDOException $e) {
@@ -16,6 +16,8 @@
   }
 
   require_once 'crud.php';
+  require_once 'user.php';
   $crud = new crud($pdo);
+  $user = new user($pdo);
 
 ?>

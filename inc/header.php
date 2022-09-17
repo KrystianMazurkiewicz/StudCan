@@ -1,5 +1,6 @@
 <?php
-  include 'config/database.php';
+  include_once 'inc/session.php';
+  include_once 'config/database.php';
 ?>
 
 
@@ -24,8 +25,10 @@
         <p class="change-profile-info">Change profile info</p>
       </a>
       <?php include_once 'logic/main_nav.php' ?>
-      <a class="university-badge-container" href="https://www.oslomet.no/">
+      <a class="university-badge-container" href="logout.php">
+      <!-- <a class="university-badge-container" href="https://www.oslomet.no/"> -->
         <img aria-hidden="true" class="university-badge" src="https://fest-network.eu/wp-content/uploads/2019/05/Oslo-Met-300x300-e1561746604844.jpg" alt="">
       </a>
+      <a href="" class="logout"></a>
     </nav>
   </header>

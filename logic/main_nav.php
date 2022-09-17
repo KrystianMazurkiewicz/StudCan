@@ -40,8 +40,8 @@
   } else if ($current_user == 'student') {
     echo '
     <ul>
-      <li ' . (($title == 'index') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'index') ? '' : 'index.php') . '">
+      <li ' . (($title == 'index2') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'index2') ? '' : 'index.php') . '">
           <p class="nav-tag">
             Available Interships
           </p>
