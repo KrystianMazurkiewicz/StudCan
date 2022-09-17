@@ -59,5 +59,18 @@
     //     return false;
     //   }
     // }
+
+    
+    public function getUsers() {
+      try {
+        $sql = "SELECT * FROM users";
+        $result = $this->db->query($sql);
+        return $result;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
   }
 ?>

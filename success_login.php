@@ -11,11 +11,12 @@
   }
 
   if ($isSuccess) {
-    echo 'Username: ' . $isSuccess["username"];
+    // echo 'Username: ' . $isSuccess["username"];
     $_SESSION['username'] = $isSuccess['username'];
-    $_SESSION['role'] = $isSuccess['role'];
     $_SESSION['userid'] = $isSuccess['id'];
+    $_SESSION['role'] = $isSuccess['role'];
     header('Location: admin_index.php');
+
   } else {
     header('Location: index.php');
   }

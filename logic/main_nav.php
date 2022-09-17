@@ -16,6 +16,13 @@
           </p>
         </a>
       </li>
+      <li>
+        <a href="members.php">
+          <p class="nav-tag">
+            Members
+          </p>
+        </a>
+      </li>
     </ul>
     ';
   } else if ($current_user == 'company') {
@@ -32,6 +39,13 @@
         <a href="' . (($title == 'company_internships') ? '' : 'company_internships.php') . '">
           <p class="nav-tag">
             Your Posts
+          </p>
+        </a>
+      </li>
+      <li>
+        <a href="members.php">
+          <p class="nav-tag">
+            Members
           </p>
         </a>
       </li>
@@ -54,9 +68,40 @@
           </p>
         </a>
       </li>
+      <li>
+        <a href="members.php">
+          <p class="nav-tag">
+            Members
+          </p>
+        </a>
+      </li>
     </ul>
     ';
   } else {
-    echo $user;
+    echo '
+    <ul>
+      <li>
+        <a href="index.php">
+          <p class="nav-tag">
+            Available Interships
+          </p>
+        </a>
+      </li>
+      <li>
+        <a href="student_status.php">
+          <p class="nav-tag">
+            View Status
+          </p>
+        </a>
+      </li>
+      <li>
+        <a href="members.php">
+          <p class="nav-tag">
+            Members
+          </p>
+        </a>
+      </li>
+    </ul>
+    ';
   }
 ?>

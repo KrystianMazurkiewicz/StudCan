@@ -11,5 +11,8 @@
   else if ($title == 'edit_internship') {
     echo '<link rel="stylesheet" href="styles/create_internship.css">';
   }
+  else if ($title == 'members') {
+    echo '<link rel="stylesheet" href="styles/members.css">';
+  }
   
 ?>
