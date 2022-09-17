@@ -2,18 +2,23 @@
   $title = 'index2';
   $current_user = 'student';
   include 'inc/header.php';
+  require_once 'db/conn.php';
+  require_once 'inc/header.php';
+
+  $internships = $crud->getAllInternships();
+  $tags = $crud->getAllPossibleTags();
 ?>
 
-<?php
+<!-- ?php
   $sql = 'SELECT * FROM internships';
   $result = mysqli_query($conn, $sql);
-  $interships = mysqli_fetch_all($result, MYSQLI_ASSOC);
-?>
+  $internships = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?> -->
 
 <?php
-  $sql = 'SELECT name FROM tags';
-  $result = mysqli_query($conn, $sql);
-  $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  // $sql = 'SELECT name FROM tags';
+  // $result = mysqli_query($conn, $sql);
+  // $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 
@@ -32,9 +37,9 @@
         </div>
         <button id="search-for-internships">Search for internships</button>
       </form>
-      <p class="available-internships">37 interships available:</p>
+      <p class="available-internships">37 internships available:</p>
       <section>
-      <?php foreach($interships as $internship): ?>
+      <?php foreach($internships as $internship): ?>
         <article class="firma-container">
           <div class="firma">
             <h2 class="title-for-job-description">

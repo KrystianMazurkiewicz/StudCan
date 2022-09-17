@@ -14,8 +14,8 @@
     echo 'Username: ' . $isSuccess["username"];
     $_SESSION['username'] = $isSuccess['username'];
     $_SESSION['role'] = $isSuccess['role'];
-    $_SESSION['userid'] = $isSuccess['userid'];
-
+    $_SESSION['userid'] = $isSuccess['id'];
+    header('Location: admin_index.php');
   } else {
     header('Location: index.php');
   }

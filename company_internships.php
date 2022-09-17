@@ -1,13 +1,17 @@
 <?php
   $title = 'company_internships';
   $current_user = 'company';
+  require_once 'db/conn.php';
   include 'inc/header.php';
+
+  $internships = $crud->getAllInternships();
+  $tags = $crud->getAllPossibleTags();
 ?>
 
 <?php
-  $sql = 'SELECT * FROM internships';
-  $result = mysqli_query($conn, $sql);
-  $interships = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  // $sql = 'SELECT * FROM internships';
+  // $result = mysqli_query($conn, $sql);
+  // $interships = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 

@@ -48,6 +48,7 @@
         $stmt->bindparam(':id', $id);
         $stmt->execute();
         return true;
+
       } catch (PDOException $e) {
         echo $e->getMessage();
         return false;
@@ -59,13 +60,30 @@
         $sql = "SELECT * FROM internships";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
-        return true;
+        $result = $stmt->fetchAll();
+        return $result;
         
       } catch (PDOException $e) {
         echo $e->getMessage();
         return false;
       }
     }
+    
+    public function getAllPossibleTags() {
+      try {
+        $sql = "SELECT name FROM tags";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+
 
    
 
