@@ -16,8 +16,8 @@
           </p>
         </a>
       </li>
-      <li>
-        <a href="members.php">
+      <li ' . (($title == 'members') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'members') ? '' : 'members.php') . '">
           <p class="nav-tag">
             Members
           </p>
@@ -42,8 +42,8 @@
           </p>
         </a>
       </li>
-      <li>
-        <a href="members.php">
+      <li ' . (($title == 'members') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'members') ? '' : 'members.php') . '">
           <p class="nav-tag">
             Members
           </p>
@@ -68,8 +68,8 @@
           </p>
         </a>
       </li>
-      <li>
-        <a href="members.php">
+      <li ' . (($title == 'members') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'members') ? '' : 'members.php') . '">
           <p class="nav-tag">
             Members
           </p>
@@ -78,30 +78,6 @@
     </ul>
     ';
   } else {
-    echo '
-    <ul>
-      <li>
-        <a href="index.php">
-          <p class="nav-tag">
-            Available Interships
-          </p>
-        </a>
-      </li>
-      <li>
-        <a href="student_status.php">
-          <p class="nav-tag">
-            View Status
-          </p>
-        </a>
-      </li>
-      <li>
-        <a href="members.php">
-          <p class="nav-tag">
-            Members
-          </p>
-        </a>
-      </li>
-    </ul>
-    ';
+    echo 'Something went wrong';
   }
 ?>

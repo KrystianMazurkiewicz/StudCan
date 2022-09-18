@@ -24,19 +24,46 @@
       </form>
       <p class="available-internships">37 students:</p>
       <section class="list-of-members">
-        <div class="column row-titles">
-          <div class="row">Username</div>
-          <div class="row">Role</div>
-        </div>
-        <?php foreach($users as $user): ?>
-          <div class="column">
-            <div class="row"><?php echo $user['username'] ?></div>
-            <div class="row"><?php echo $user['role'] ?></div>
-          </div>
-        <?php endforeach; ?>
+        
       </section>
     </section>
   </main>
+
+  <script>
+    const list_of_members = document.querySelector(".list-of-members")
+    const membersArrayJS = [
+      {
+        username: "Username",
+        role: "Role"
+      },
+      <?php foreach($users as $user): 
+        echo '{
+          username: "' . $user['username'] . '",
+          role: "' . $user['role'] . '",
+        },';
+      endforeach ?>
+    ];
+    
+    function showMembers() {
+      membersArrayJS.forEach(member => {
+        const div = document.createElement('div')
+        div.classList.add('column')
+      
+        const first_row = document.createElement('div')
+        first_row.classList.add('row')
+        first_row.innerText = member['username']
+        div.append(first_row)
+        
+        const second_row = document.createElement('div')
+        second_row.classList.add('row')
+        second_row.innerText = member['role']
+        div.append(second_row)
+        
+        list_of_members.append(div)
+      })
+    }
+    showMembers()
+  </script>
 
   <!-- <footer>
     Copyright 2022

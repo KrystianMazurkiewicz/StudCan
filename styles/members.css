@@ -69,20 +69,20 @@ h1 {
   justify-content: space-evenly;
 }
 
+.column:first-child {
+  background-color: #583C5A;
+}
+
+.column:first-child > .row {
+  color: white !important;
+}
+
 .column:nth-child(2n) {
   background-color: #583c5a30;
 }
 
 .column:hover:not(:nth-child(1)) {
   background-color: rgba(88, 60, 90, 0.382);
-}
-
-.row-titles {
-  background-color: #583C5A;
-}
-
-.row-titles .row {
-  color: white !important;
 }
 
 .row {

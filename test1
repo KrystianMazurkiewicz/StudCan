@@ -1,0 +1,10 @@
+<div class="column row-titles">
+          <div class="row">Username</div>
+          <div class="row">Role</div>
+        </div>
+        <?php foreach($users as $user): ?>
+          <div class="column">
+            <div class="row"><?php echo $user['username'] ?></div>
+            <div class="row"><?php echo $user['role'] ?></div>
+          </div>
+        <?php endforeach; ?>
