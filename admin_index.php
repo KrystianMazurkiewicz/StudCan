@@ -1,6 +1,6 @@
 <?php
   $title = 'index2';
-  $current_user = "admin";
+  // $current_user = "admin";
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 

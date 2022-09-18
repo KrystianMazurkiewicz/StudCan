@@ -1,6 +1,7 @@
 <?php
   $title = 'members';
-  $current_user = "admin";
+  // $current_user = "admin";
+  // $current_user = $_SESSION['role'];
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 

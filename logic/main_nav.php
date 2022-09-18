@@ -25,7 +25,7 @@
       </li>
     </ul>
     ';
-  } else if ($current_user == 'company') {
+  } else if ($current_user == 'organization') {
     echo '
     <ul>
       <li ' . (($title == 'create_internship') ? 'class="active"' : '') . '>

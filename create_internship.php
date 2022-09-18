@@ -1,6 +1,6 @@
 <?php
   $title = 'create_internship';
-  $current_user = 'company';
+  // $current_user = 'company';
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 ?>

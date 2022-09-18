@@ -1,6 +1,6 @@
 <?php
   $title = 'company_internships';
-  $current_user = 'company';
+  // $current_user = 'company';
   require_once 'db/conn.php';
   include 'inc/header.php';
 

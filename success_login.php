@@ -1,6 +1,6 @@
 <?php
   $title = 'index';
-  $current_user = 'student';
+  // $current_user = 'student';
   require_once 'inc/header.php';
   require_once 'db/conn.php';
 
