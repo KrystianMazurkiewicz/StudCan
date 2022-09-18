@@ -1,9 +1,7 @@
 <?php
-
-  $title = 'view_internships_student';
-  include_once 'inc/header.php';
+  // $title = 'view_internships_student';
+  // include_once 'inc/header.php';
   include_once 'db/conn.php';
-
 ?>
 
 <!DOCTYPE html>

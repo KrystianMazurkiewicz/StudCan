@@ -1,5 +1,5 @@
 <?php
-  $title = 'view_internships_student';
+  $title = 'index_admin';
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 

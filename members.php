@@ -9,7 +9,7 @@
 
   <main>
     <section class="content-container">
-      <h1>Member:</h1>
+      <h1>Members</h1>
       <!-- <form action="?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET"> -->
         <div class="hashtag-options" onclick="showMembers()">
           <?php foreach($tags as $tag): ?>

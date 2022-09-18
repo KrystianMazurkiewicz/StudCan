@@ -10,9 +10,11 @@
   <main>
     <section class="content-container">
       <h1>Your Company's Internships</h1>
-      <p class="available-internships">You have currently <?php echo '2' // this should be dynamically coming from mysql, will be done in the future ?> interships:</p>
+      <p class="available-internships">
+        You have currently <?php echo '2' // this should be dynamically coming from mysql, will be done in the future ?> internships:
+      </p>
       <section>
-      <?php foreach($interships as $internship): ?>
+      <?php foreach($internships as $internship): ?>
         <?php if ($internship['co_name'] != 'Oslomet') continue ?>
         <article class="firma-container">
           <input type="hidden" name="id" value="<?php echo $internship['id'] ?>">
