@@ -1,7 +1,5 @@
 <?php
   $title = 'members';
-  // $current_user = "admin";
-  // $current_user = $_SESSION['role'];
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
@@ -13,7 +11,7 @@
     <section class="content-container">
       <h1>Member:</h1>
       <!-- <form action="?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET"> -->
-        <div class="hashtag-options">
+        <div class="hashtag-options" onclick="showMembers()">
           <?php foreach($tags as $tag): ?>
             <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
               <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
@@ -21,7 +19,7 @@
             </label>
           <?php endforeach; ?>
         </div>
-        <button id="sort-skills" onclick="showMembers()">Search students based on skills</button>
+        <!-- <button id="sort-skills" onclick="showMembers()">Search students based on skills</button> -->
       <!-- </form> -->
       <p class="available-internships">37 students:</p>
       <section class="list-of-members">
@@ -33,6 +31,7 @@
   <script>
     const list_of_members = document.querySelector(".list-of-members")
     const membersArrayJS = [
+      // first object sets the titles for each row 
       {
         username: "Username",
         role: "Role"
@@ -43,7 +42,7 @@
           role: "' . $user['role'] . '",
         },';
       endforeach ?>
-    ];
+    ]
 
     function buildTable(member) {
       const div = document.createElement('div')

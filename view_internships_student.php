@@ -1,26 +1,12 @@
 <?php
-  $title = 'index2';
-  // $current_user = 'student';
-  include 'inc/header.php';
+  $title = 'view_internships_student';
+  require_once 'inc/header.php';
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
   $internships = $crud->getAllInternships();
   $tags = $crud->getAllPossibleTags();
 ?>
-
-<!-- ?php
-  $sql = 'SELECT * FROM internships';
-  $result = mysqli_query($conn, $sql);
-  $internships = mysqli_fetch_all($result, MYSQLI_ASSOC);
-?> -->
-
-<?php
-  // $sql = 'SELECT name FROM tags';
-  // $result = mysqli_query($conn, $sql);
-  // $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
-?>
-
 
   <main>
     <section class="content-container">
@@ -30,7 +16,7 @@
         <div class="hashtag-options">
           <?php foreach($tags as $tag): ?>
             <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
-              <input type="checkbox" name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
+              <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
               <?php echo $tag['name'] ?>
             </label>
           <?php endforeach; ?>
@@ -39,7 +25,8 @@
       </form>
       <p class="available-internships">37 internships available:</p>
       <section>
-      <?php foreach($internships as $internship): ?>
+        <?php foreach($internships as $internship): ?>
+        <!-- <input type="hidden" name="post_id" value="?php echo $internship['id'] ?>"> -->
         <article class="firma-container">
           <div class="firma">
             <h2 class="title-for-job-description">
@@ -76,7 +63,9 @@
               </div>
             </div>
           </div>
-          <button class="send-application" alt="Send application"></button>
+          <a href="success_send_application?id=<?php echo $internship['id'] ?>.php">
+            <button class="send-application" alt="Send application"></button>
+          </a>
         </article>
         <?php endforeach; ?>
       </section>

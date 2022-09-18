@@ -2,9 +2,7 @@
   include_once 'inc/session.php';
   include_once 'config/database.php';
   $current_user = $_SESSION['role'];
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

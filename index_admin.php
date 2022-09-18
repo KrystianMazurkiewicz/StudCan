@@ -1,27 +1,11 @@
 <?php
-  $title = 'index2';
-  // $current_user = "admin";
+  $title = 'view_internships_student';
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
   $internships = $crud->getAllInternships();
   $tags = $crud->getAllPossibleTags();
-  // $internships = var_dump($internship)
-  // echo $internships;
-  // echo $internships[0]['co_name'];
-  // echo var_dump($internships);
-
-  // $sql = 'SELECT * FROM internships';
-  // $result = mysqli_query($conn, $sql);
-  // $internships = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-
-<?php
-  // $sql = 'SELECT name FROM tags';
-  // $result = mysqli_query($conn, $sql);
-  // $tags = mysqli_fetch_all($result, MYSQLI_ASSOC);
-?>
-
 
   <main>
     <section class="content-container">

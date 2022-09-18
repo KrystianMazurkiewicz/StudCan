@@ -35,8 +35,8 @@
           </p>
         </a>
       </li>
-      <li ' . (($title == 'company_internships') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'company_internships') ? '' : 'company_internships.php') . '">
+      <li ' . (($title == 'internships_company') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'internships_company') ? '' : 'internships_company.php') . '">
           <p class="nav-tag">
             Your Posts
           </p>
@@ -54,15 +54,15 @@
   } else if ($current_user == 'student') {
     echo '
     <ul>
-      <li ' . (($title == 'index2') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'index2') ? '' : 'index.php') . '">
+      <li ' . (($title == 'view_internships_student') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'view_internships_student') ? '' : 'view_internships_student.php') . '">
           <p class="nav-tag">
             Available Interships
           </p>
         </a>
       </li>
-      <li ' . (($title == 'student_status') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'student_status') ? '' : 'student_status.php') . '">
+      <li ' . (($title == 'status_student') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'status_student') ? '' : 'status_student.php') . '">
           <p class="nav-tag">
             View Status
           </p>

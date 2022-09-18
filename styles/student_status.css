@@ -18,7 +18,6 @@ h1 {
 }
 
 .hashtag-options {
-  /* background-color: rgb(193, 193, 193); */
   display: flex;
   margin-top: 4px;
 }
@@ -41,50 +40,23 @@ h1 {
   margin-right: 4px;
 }
 
-#sort-skills {
+/* #sort-skills {
   font-weight: 500;
   margin: 10px 0 50px;
   padding: 10px;
   border: 1px solid #583C5A;
   cursor: pointer;
-}
+} */
 
-.available-internships {
+.your-internships {
   font-size: 1.75rem;
   font-weight: 500;
   padding-bottom: 30px;
 }
 
-.list-of-members {
+.list-of-your-internships {
   display: flex;
   flex-direction: column;
   width: 100%;
   border: #583C5A solid 1px;
-}
-
-.column {
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.column:first-child {
-  background-color: #583C5A;
-}
-
-.column:first-child > .row {
-  color: white !important;
-}
-
-.column:nth-child(2n) {
-  background-color: #583c5a30;
-}
-
-.column:hover:not(:nth-child(1)) {
-  background-color: rgba(88, 60, 90, 0.382);
-}
-
-.row {
-  width: 100%;
 }

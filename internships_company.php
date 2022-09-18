@@ -1,19 +1,11 @@
 <?php
-  $title = 'company_internships';
-  // $current_user = 'company';
+  $title = 'internships_company';
   require_once 'db/conn.php';
-  include 'inc/header.php';
+  require_once 'inc/header.php';
 
   $internships = $crud->getAllInternships();
   $tags = $crud->getAllPossibleTags();
 ?>
-
-<?php
-  // $sql = 'SELECT * FROM internships';
-  // $result = mysqli_query($conn, $sql);
-  // $interships = mysqli_fetch_all($result, MYSQLI_ASSOC);
-?>
-
 
   <main>
     <section class="content-container">
@@ -77,7 +69,7 @@
             <a href="edit_internship.php?id=<?php echo $internship['id'] ?>" class="edit-button">Edit</a>  
             <a
               onclick="return confirm('Are you sure you want to delete this post?')" 
-              href="delete_success.php?id=<?php echo $internship['id'] ?>"
+              href="success_delete.php?id=<?php echo $internship['id'] ?>"
               class="delete-button">
               Delete
             </a>

@@ -1,10 +1,9 @@
 <?php
   $title = 'edit_internship';
-  // $current_user = 'company';
   require_once 'db/conn.php';
   require_once 'inc/header.php';
     
-// make it so u get results from database and use get id
+  // make it so u get results from database and use get id
 
   if (isset($_POST['submit'])) {
     $id = $_POST['id'];
@@ -12,6 +11,8 @@
     $post_title = $_POST['post_title'];
     $post_description = $_POST['post_description'];
     $co_website = $_POST['co_website'];
+  } else {
+
   }
 ?>
 
