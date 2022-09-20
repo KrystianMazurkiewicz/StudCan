@@ -63,7 +63,7 @@
               </div>
             </div>
           </div>
-          <a href="success_send_application?id=<?php echo $internship['id'] ?>.php">
+          <a href="success_send_application.php?id=<?php echo $internship['id'] ?>">
             <button class="send-application" alt="Send application"></button>
           </a>
         </article>
