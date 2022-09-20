@@ -40,7 +40,7 @@
     const list_of_your_internships = document.querySelector(".list-of-your-internships")
     const internshipsArrayJS = [
       <?php foreach($post_ids as $post_id):
-        $this_post = $crud->get_internships($post_id['internship_id']);
+        $this_post = $crud->get_internship($post_id['internship_id']);
         echo '{
           id: "' . $this_post[0]['id'] . '",
           co_name: "' . $this_post[0]['co_name'] . '",

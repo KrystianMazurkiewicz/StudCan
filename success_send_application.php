@@ -5,7 +5,7 @@
 
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $isSuccess = $crud->get_internships($id);
+    $isSuccess = $crud->get_internship($id);
   }
 
   if ($isSuccess) {

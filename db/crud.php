@@ -69,7 +69,7 @@
       }
     }
 
-    public function get_internships($id) {
+    public function get_internship($id) {
       try {
         $sql = "SELECT * FROM internships WHERE id = :id";
         $stmt = $this->db->prepare($sql);

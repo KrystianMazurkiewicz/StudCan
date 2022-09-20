@@ -3,14 +3,18 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
     
-  // make it so u get results from database and use get id
-
-  if (isset($_POST['submit'])) {
-    $id = $_POST['id'];
-    $co_name = $_POST['co_name'];
-    $post_title = $_POST['post_title'];
-    $post_description = $_POST['post_description'];
-    $co_website = $_POST['co_website'];
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $isSuccess = $crud->get_internship($id);
+  } else {
+    header("Location: internships_company.php");
+  }
+  
+  if ($isSuccess) {
+    $co_name = $isSuccess[0]['co_name'];
+    $post_title = $isSuccess[0]['post_title'];
+    $post_description = $isSuccess[0]['post_description'];
+    $co_website = $isSuccess[0]['co_website'];
   } else {
 
   }
