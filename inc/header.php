@@ -1,6 +1,5 @@
 <?php
-  include_once 'inc/session.php';
-  include_once 'config/database.php';
+  require_once 'inc/session.php';
   $current_user = $_SESSION['role'];
 ?>
 
@@ -12,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $title ?></title>
   <link rel="stylesheet" href="styles/header.css">
-  <?php include_once 'logic/stylesheets.php' ?>
+  <?php require_once 'logic/stylesheets.php' ?>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
         <p class="users-name">Krystian Mazurkiewicz</p>
         <p class="change-profile-info">Change profile info</p>
       </a>
-      <?php include_once 'logic/main_nav.php' ?>
+      <?php require_once 'logic/main_nav.php' ?>
       <a class="university-badge-container" href="logout.php">
       <!-- <a class="university-badge-container" href="https://www.oslomet.no/"> -->
         <img aria-hidden="true" class="university-badge" src="https://fest-network.eu/wp-content/uploads/2019/05/Oslo-Met-300x300-e1561746604844.jpg" alt="">
