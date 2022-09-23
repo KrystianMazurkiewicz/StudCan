@@ -128,7 +128,24 @@
       }
     }
 
-   
+    public function edit_profile($short_about_me, $github_lenke, $mail_lenke, $linkedin_lenke, $about_me, $id) {
+      try { 
+        $sql = "UPDATE `about_me` SET `short_about_me`=:short_about_me, `github_lenke`=:github_lenke, `mail_lenke`=:mail_lenke, `linkedin_lenke`=:linkedin_lenke, `about_me`=:about_me WHERE `about_me`.`user_id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':short_about_me', $short_about_me);
+        $stmt->bindparam(':github_lenke', $github_lenke);
+        $stmt->bindparam(':mail_lenke', $mail_lenke);
+        $stmt->bindparam(':linkedin_lenke', $linkedin_lenke);
+        $stmt->bindparam(':about_me', $about_me);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }  
+    }
 
   }
 ?>

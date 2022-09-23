@@ -72,5 +72,22 @@
         return false;
       }
     }
+    
+    public function get_info_about_profile($id) {
+      try {
+        $sql = "SELECT * FROM about_me WHERE user_id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+    
   }
 ?>

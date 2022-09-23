@@ -42,6 +42,13 @@
           </p>
         </a>
       </li>
+      <li ' . (($title == 'view_profile') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'view_profile') ? '' : 'view_profile.php') . '">
+          <p class="nav-tag">
+            View Profile
+          </p>
+        </a>
+      </li>
     </ul>
     ';
   } else if ($current_user == 'student') {
