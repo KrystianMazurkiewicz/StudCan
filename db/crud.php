@@ -22,6 +22,22 @@
         return false;
       }
     }
+
+    public function insert_invitation_from_company($user_id, $internship_id, $status) {
+      try {
+        $sql = "INSERT INTO student_has_internship(user_id, internship_id, status) VALUES (:user_id, :internship_id, :status);";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':internship_id', $internship_id);
+        $stmt->bindparam(':status', $status);
+        $stmt->execute();
+        return true;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
     
     public function edit($id, $co_name, $post_title, $post_description, $co_website) {
       try { 
@@ -61,6 +77,51 @@
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
+        return $result;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+    public function get_all_internships_from_company($co_name) {
+      try {
+        $sql = "SELECT post_title FROM internships WHERE co_name = :co_name";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':co_name', $co_name);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+    public function get_internship_id_from_company_by_post_title($post_title) {
+      try {
+        $sql = "SELECT id FROM internships WHERE post_title = :post_title";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':post_title', $post_title);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+    public function get_internship_by_id($id) {
+      try {
+        $sql = "SELECT * FROM internships WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
         return $result;
         
       } catch (PDOException $e) {
@@ -138,6 +199,37 @@
         $stmt->bindparam(':linkedin_lenke', $linkedin_lenke);
         $stmt->bindparam(':about_me', $about_me);
         $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }  
+    }
+
+    public function set_student_status_to_accepted_for_internship($user_id, $internship_id) {
+      try { 
+        $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':internship_id', $internship_id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }  
+    }
+
+    public function set_student_status_to_denied_for_internship($user_id, $internship_id) {
+      try { 
+        // SQL BELOW MIGHT GIVE ERROR BECAUSE OF 'OR' AT THE END!
+        $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending' OR `status` = 'accepted'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':internship_id', $internship_id);
         $stmt->execute();
         return true;
 

@@ -21,10 +21,10 @@
           Username
           <input required type="text" name="username" placeholder="Type in your username" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['username'] ?>">
         </label>
-        <label>
+        <!-- <label>
           Password
           <input required type="password" name="password" placeholder="Type in your password">
-        </label>
+        </label> -->
         <button type="submit" name="submit">Login</button>
       </form>
     </section>

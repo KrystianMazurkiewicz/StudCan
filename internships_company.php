@@ -5,17 +5,32 @@
 
   $internships = $crud->getAllInternships();
   $tags = $crud->getAllPossibleTags();
+  $users = $user->getUsers();
 ?>
 
-  <main>
-    <section class="content-container">
-      <h1>Your Company's Internships</h1>
-      <p class="available-internships">
-        You have currently <?php echo '2' // this should be dynamically coming from mysql, will be done in the future ?> internships:
-      </p>
-      <section>
-      <?php foreach($internships as $internship): ?>
+<main>
+  <section class="content-container">
+    <h1>Your Company's Internships</h1>
+    <p class="available-internships">
+      <?php
+        $i = 0;
+        foreach($internships as $internship):
+          if ($internship['co_name'] == 'Oslomet') $i++;
+        endforeach;
+      ?>
+      You created <?php echo $i ?> internships:
+    </p>
+
+    <style>
+      .firma-container:hover .people-applied {
+        text-decoration: underline !important;
+      }
+    </style>
+
+    <section>
+      <?php foreach ($internships as $internship) : ?>
         <?php if ($internship['co_name'] != 'Oslomet') continue ?>
+        <!-- <article class="firma-container" data-modal-target="#modal"> -->
         <article class="firma-container">
           <input type="hidden" name="id" value="<?php echo $internship['id'] ?>">
           <div class="firma">
@@ -26,8 +41,8 @@
             <p class="job-description">
               <?php echo $internship['post_description'] ?>
               <input type="hidden" name="post_description" value="<?php echo $internship['post_description'] ?>">
-              <?php if($internship['post_description'] == '') echo
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?'; 
+              <?php if ($internship['post_description'] == '') echo
+              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?';
               ?>
             </p>
             <div class="bottom-section">
@@ -37,7 +52,7 @@
               </div>
               <div class="company-and-people-applied">
                 <div class="company">
-                  Co.: 
+                  Co.:
                   <strong>
                     <a href="<?php echo $internship['co_website'] ?>">
                       <input type="hidden" name="co_website" value="<?php echo $internship['co_website'] ?>">
@@ -46,12 +61,12 @@
                     </a>
                   </strong>
                 </div>
-                <div class="people-applied">
+                <a class="people-applied" href="students_that_applied.php?id=<?php echo $internship['id'] ?>">
                   <b>
                     <?php echo $internship['ppl_applied'] . ' people'; ?>
                   </b>
                   have applied
-                </div>
+                </a>
               </div>
               <div class="created-at">
                 Created at:
@@ -68,22 +83,88 @@
             </div>
           </div>
           <div class="button-container">
-            <a href="edit_internship.php?id=<?php echo $internship['id'] ?>" class="edit-button">Edit</a>  
-            <a
-              onclick="return confirm('Are you sure you want to delete this post?')" 
-              href="success_delete.php?id=<?php echo $internship['id'] ?>"
-              class="delete-button">
+            <a href="edit_internship.php?id=<?php echo $internship['id'] ?>" class="edit-button">Edit</a>
+            <a onclick="return confirm('Are you sure you want to delete this post?')" href="success_delete.php?id=<?php echo $internship['id'] ?>" class="delete-button">
               Delete
             </a>
           </div>
         </article>
-        <?php endforeach; ?>
-      </section>
+      <?php endforeach; ?>
     </section>
-  </main>
+  </section>
+</main>
 
-  <!-- <footer>
+<!-- <div class="modal" id="modal">
+  <div class="modal-header">
+    <div class="title">Students interested in this project:</div>
+    <button data-close-button class="close-button">&times;</button>
+  </div>
+  <div class="modal-body">
+    <form method="POST" action="success_invite_student_to_project.php">
+      <input type="hidden" id="user_username" name="user_username">
+      <input type="hidden" id="post_title_input" name="post_title">
+      Either accept or remove a student from this project.
+      <section class="list-of-members">
+        <div class="column">
+          <div class="row">a</div>
+          <div class="row">admin</div>
+        </div>
+        ?php foreach ($users as $user) : ?>
+          <div class="column">
+            <div class="row">?php echo $user['username'] ?></div>
+            <div class="row">?php echo $user['role'] ?></div>
+          </div>
+        ?php endforeach ?>
+      </section>
+      <button name="submit" type="submit">Invite</button>
+    </form>
+  </div>
+</div>
+<div id="overlay"></div>
+
+<script>
+  let openModalButtons = document.querySelectorAll('[data-modal-target]')
+  let closeModalButtons = document.querySelectorAll('[data-close-button]')
+  const overlay = document.getElementById('overlay')
+
+  openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = document.querySelector(button.dataset.modalTarget)
+      document.getElementById("user_username").value = button.firstChild.innerText
+      openModal(modal)
+    })
+  })
+
+  overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+      closeModal(modal)
+    })
+  })
+
+  closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal')
+      closeModal(modal)
+    })
+  })
+
+  function openModal(modal) {
+    if (modal == null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+  }
+
+  function closeModal(modal) {
+    if (modal == null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+  }
+</script> -->
+
+<!-- <footer>
     Copyright 2022
   </footer> -->
 </body>
+
 </html>
