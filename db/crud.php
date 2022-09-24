@@ -71,6 +71,35 @@
       }
     }
 
+    public function archive_internship($id) {
+      try {
+        $sql = "UPDATE `internships` SET `status` = 'archived' WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+    public function unarchive_internship($id) {
+      try {
+        // HERE IS AN ERROR! THIS WILL ALLOW COMPANIES TO PUBLISH EVEN THO THEY ARE IN THE REVIEWED PROCESS!
+        $sql = "UPDATE `internships` SET `status` = 'published' WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
     public function getAllInternships() {
       try {
         $sql = "SELECT * FROM internships";

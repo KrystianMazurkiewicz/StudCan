@@ -5,8 +5,8 @@
 
   if(isset($_GET['id'])) {
     $internships = $crud->get_internship_by_id($_GET['id']);
-    $tags = $crud->getAllPossibleTags();
     $students = $user->get_student_that_is_interested_in_internship($_GET['id']);
+    $tags = $crud->getAllPossibleTags();
   } else {
     header("Location: internships_company.php");
   }

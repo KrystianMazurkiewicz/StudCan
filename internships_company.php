@@ -25,15 +25,18 @@
       .firma-container:hover .people-applied {
         text-decoration: underline !important;
       }
+
+      .archived {
+        opacity: .5;
+      }
     </style>
 
     <section>
       <?php foreach ($internships as $internship) : ?>
         <?php if ($internship['co_name'] != 'Oslomet') continue ?>
-        <!-- <article class="firma-container" data-modal-target="#modal"> -->
         <article class="firma-container">
           <input type="hidden" name="id" value="<?php echo $internship['id'] ?>">
-          <div class="firma">
+          <div class="firma <?php echo $internship['status'] ?>">
             <h2 class="title-for-job-description">
               <?php echo $internship['post_title'] ?>
               <input type="hidden" name="post_title" value="<?php echo $internship['post_title'] ?>">
@@ -41,8 +44,8 @@
             <p class="job-description">
               <?php echo $internship['post_description'] ?>
               <input type="hidden" name="post_description" value="<?php echo $internship['post_description'] ?>">
-              <?php if ($internship['post_description'] == '') echo
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?';
+              <?php if ($internship['post_description'] == '') 
+                echo 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?';
               ?>
             </p>
             <div class="bottom-section">
@@ -63,7 +66,8 @@
                 </div>
                 <a class="people-applied" href="students_that_applied.php?id=<?php echo $internship['id'] ?>">
                   <b>
-                    <?php echo $internship['ppl_applied'] . ' people'; ?>
+                    <?php echo count($user->get_student_that_is_interested_in_internship($internship['id'])) ?>
+                    people
                   </b>
                   have applied
                 </a>
@@ -83,10 +87,28 @@
             </div>
           </div>
           <div class="button-container">
-            <a href="edit_internship.php?id=<?php echo $internship['id'] ?>" class="edit-button">Edit</a>
-            <a onclick="return confirm('Are you sure you want to delete this post?')" href="success_delete.php?id=<?php echo $internship['id'] ?>" class="delete-button">
+            <?php if ($internship['status'] == 'archived') { ?>
+              <a
+                href="success_unarchive_internship.php?id=<?php echo $internship['id'] ?>" 
+                class="edit-button"
+              >
+                Unarchive
+              </a>
+            <?php } else { ?>
+            <a 
+              href="edit_internship.php?id=<?php echo $internship['id'] ?>" 
+              class="edit-button"
+            >
+              Edit
+            </a>
+            <a 
+              onclick="return confirm('Are you sure you want to delete this post?')"
+              href="success_archive_internship.php?id=<?php echo $internship['id'] ?>"
+              class="delete-button"
+            >
               Delete
             </a>
+            <?php } ?>
           </div>
         </article>
       <?php endforeach; ?>
