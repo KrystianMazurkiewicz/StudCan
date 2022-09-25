@@ -14,13 +14,18 @@
       <h1>Members</h1>
       <div class="hashtag-options" onclick="showMembers(clicked = true)">
         <?php foreach($tags as $tag): ?>
+          <?php if ($tag['id'] < 13) continue ?>
           <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
             <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
             <?php echo $tag['name'] ?>
           </label>
         <?php endforeach; ?>
       </div>
-      <p class="available-internships">37 students:</p>
+      <button id="search-for-internships" style="opacity: 0;">Search for internships</button>
+      <p class="available-internships">
+        <!-- <span class="item-count"></span>
+        students: -->
+      </p>
       <section class="list-of-members">
         
       </section>
@@ -89,6 +94,11 @@
 
       loop1: for (let i = 0; i < membersArrayJS.length; i++) {
         let checkedBoxes = document.querySelectorAll('input:checked')
+        
+        if (checkedBoxes.length == 0) {
+          document.querySelector(".available-internships").innerText = document.querySelectorAll(".column").length + " students:"
+          return buildTable(membersArrayJS[0])
+        }
 
         for (let j = 0; j < checkedBoxes.length; j++) {
           if (checkedBoxes[j].name == membersArrayJS[i]['role'] || i == 0) {
@@ -145,6 +155,9 @@
           })
         })
       }
+
+      // document.querySelector(".item-count").innerText = document.querySelectorAll(".column").length - 1
+      document.querySelector(".available-internships").innerText = document.querySelectorAll(".column").length - 1 + " members:"
     }
     showMembers()
 

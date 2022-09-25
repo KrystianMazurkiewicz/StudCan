@@ -13,19 +13,31 @@
   <title>Document</title>
 </head>
 <body>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    main > * {
+      transform: scale(5);
+    }
+  </style>
+
   <main>
     <section class="content-container">
       <h1>Login</h1>
       <form method="post" action="success_login.php">
         <label>
           Username
-          <input required type="text" name="username" placeholder="Type in your username" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['username'] ?>">
+          <input style="padding: 20px" required type="text" name="username" placeholder="Type in your username" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['username'] ?>">
         </label>
         <!-- <label>
           Password
           <input required type="password" name="password" placeholder="Type in your password">
         </label> -->
-        <button type="submit" name="submit">Login</button>
+        <button type="submit" name="submit" style="width: 100px; height:60px;background:lightblue;">Login</button>
       </form>
     </section>
   </main>

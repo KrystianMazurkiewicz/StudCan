@@ -4,7 +4,7 @@
   require_once 'inc/header.php';
 
   if (isset($_GET['id'])) {
-    $result = $crud->publish_internship($_GET['id']);
+    $result = $crud->decline_internship($_GET['id']);
   }
 
   if ($result) {

@@ -21,7 +21,7 @@
             </label>
           <?php endforeach; ?>
         </div>
-        <button id="search-for-internships" style="opacity: 0;">
+        <button id="search-for-internships" style="opacity: 0; height: 0px; margin: 0px;">
           Search for internships
         </button>
       </form>
@@ -34,14 +34,14 @@
           endforeach;
           echo $i;
         ?>
-        internships available:
+        internships are available:
       </p>
       <section>
         <?php foreach($internships as $internship): ?>
-          <?php if($internship['status'] == 'archived') continue ?>
+          <?php if($internship['status'] != 'published') continue ?>
         <!-- <input type="hidden" name="post_id" value="?php echo $internship['id'] ?>"> -->
         <article class="firma-container">
-          <div class="firma">
+          <div class="firma" style="position: relative;">
             <h2 class="title-for-job-description">
               <?php echo $internship['post_title'] ?>
             </h2>
@@ -75,6 +75,52 @@
                 </div>
               </div>
             </div>
+
+
+
+
+          <style>
+            .overlay-status {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 4rem;
+            }
+
+            .color {
+              background-color: rgba(230, 230, 230, 0.677);
+              font-weight: 500;
+              text-shadow: 0px 11px 10px grey;
+              text-transform: capitalize;
+            }
+
+            .firma:hover .overlay-status {
+              display: none;
+            }
+          </style>
+
+
+          <!-- SHOULD WE HAVE THIS???????? -->
+          <!-- SHOULD WE HAVE THIS???????? -->
+          <!-- SHOULD WE HAVE THIS???????? -->
+          <!-- SHOULD WE HAVE THIS???????? -->
+          <!-- SHOULD WE HAVE THIS???????? -->
+          <?php if ($internship['status'] == 'archived') { ?>
+          <div class="overlay-status">
+            <div class="overlay-status color">
+              <?php echo $internship['status'] ?>
+            </div>
+          </div>
+          <?php } ?>
+
+
+          
+
           </div>
           <a href="success_send_application.php?id=<?php echo $internship['id'] ?>">
             <button class="send-application" alt="Send application"></button>

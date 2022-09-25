@@ -1,0 +1,53 @@
+* {
+  border: 1px solid;
+}
+
+main {
+  display: flex;
+  overflow-y: scroll;
+  justify-content: center;
+  width: 88%;
+  border-radius: 50px 0% 0% 50px;
+  background-color: white;
+}
+
+.content-container {
+  width: 76%;
+  height: 100vh;
+}
+
+.top-about-me-section {
+  display: flex;
+  justify-content: start;
+}
+
+.image-container {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  width: 30vh;
+  margin-right: 2%;
+}
+
+.image-container > img {
+  height: 100%;
+  object-fit: cover; 
+}
+
+.short-info-about-user {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 50%;
+}
+
+h1 {
+  font-size: 5rem;
+  /* padding: 6% 0 4% 0; */
+}
+h1::first-letter {
+  text-transform: capitalize;
+}
+

@@ -28,6 +28,6 @@
       <!-- <a class="university-badge-container" href="https://www.oslomet.no/"> -->
         <img aria-hidden="true" class="university-badge" src="https://fest-network.eu/wp-content/uploads/2019/05/Oslo-Met-300x300-e1561746604844.jpg" alt="">
       </a>
-      <a href="" class="logout"></a>
+      <!-- <a href="" class="logout"></a> -->
     </nav>
   </header>

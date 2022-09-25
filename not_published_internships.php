@@ -107,7 +107,7 @@
                 <a href="success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
                   Publish
                 </a>
-                <a href="" class="decline-button button">
+                <a href="success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
                   Decline
                 </a>
               </div>

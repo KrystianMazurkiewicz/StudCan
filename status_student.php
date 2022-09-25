@@ -30,6 +30,8 @@
           Cancelled
         </label>
       </div>
+      <button id="search-for-internships" style="opacity: 0; height: 0px; margin: 0px;">Search for internships</button>
+
       <p class="available-internships">
         You showed interest in
         <?php echo count($post_ids) ?>

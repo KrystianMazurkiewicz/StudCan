@@ -122,6 +122,21 @@
       }
     }
 
+    public function decline_internship($id) {
+      try {
+        // HERE IS AN ERROR! THIS WILL ALLOW COMPANIES TO PUBLISH EVEN THO THEY ARE IN THE REVIEWED PROCESS!
+        $sql = "UPDATE `internships` SET `status` = 'declined' WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
     public function getAllInternships() {
       try {
         $sql = "SELECT * FROM internships";
@@ -198,7 +213,8 @@
     
     public function getAllPossibleTags() {
       try {
-        $sql = "SELECT name FROM tags";
+        // $sql = "SELECT name FROM tags";
+        $sql = "SELECT * FROM tags";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();

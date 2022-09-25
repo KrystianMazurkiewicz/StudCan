@@ -16,39 +16,57 @@
 
   <main>
     <section class="content-container">
-      <h1><?php echo $_SESSION['username'] ?>'s profile</h1>
-      <img src="images/profile-icon.png" alt="">
-      <p>
-        <?php echo $_SESSION['username'] ?>
-      </p>
-      <p class="short-about-me">
-        <?php echo $result['short_about_me'] ?>
-      </p>
-      <a href="<?php echo $result['github_lenke'] ?>">
-        Github.com: 
-        <?php echo $result['github_lenke'] ?>
-      </a>
-      <a href="<?php echo $result['mail_lenke'] ?>">
-        Mail.com:
-        <?php echo $result['mail_lenke'] ?>
-      </a>
-      <a href="<?php echo $result['linkedin_lenke'] ?>">
-        LinkedIn.com:
-        <?php echo $result['linkedin_lenke'] ?>
-      </a>
+      <section class="top-about-me-section">
+        <div class="image-container">
+          <img src="images/profile-icon.png" alt="">
+        </div>
+        <div class="short-info-about-user">
+          <h1><?php echo $_SESSION['username'] ?>'s profile</h1>
+          <!-- <p>
+            ?php echo $_SESSION['username'] ?>
+          </p> -->
+          
+          <p class="short-about-me">
+            <?php echo $result['short_about_me'] ?>
+          </p>
+
+
+          <a href="<?php echo $result['github_lenke'] ?>">
+            Github.com: 
+            <?php echo $result['github_lenke'] ?>
+          </a>
+
+          <a href="<?php echo $result['mail_lenke'] ?>">
+            Mail.com:
+            <?php echo $result['mail_lenke'] ?>
+          </a>
+
+          <a href="<?php echo $result['linkedin_lenke'] ?>">
+            LinkedIn.com:
+            <?php echo $result['linkedin_lenke'] ?>
+          </a>
+
+          <a href="edit_profile.php">
+            Edit
+          </a>
+
+        </div>
+      </section>
+
+
 
       <div class="edit">
-        <a href="edit_profile.php">
-          Edit
-        </a>
       </div>
     </section>
-    <section class="right-side">
+
+
+
+    <!-- <section class="right-side">
       <h2>About me</h2>
       <p>
-        <?php echo $result['about_me'] ?>
+        ?php echo $result['about_me'] ?>
       </p>
-    </section>
+    </section> -->
   </main>
 </body>
 </html>
