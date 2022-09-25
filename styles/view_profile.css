@@ -1,6 +1,6 @@
-* {
+/* * {
   border: 1px solid;
-}
+} */
 
 main {
   display: flex;
@@ -11,6 +11,10 @@ main {
   background-color: white;
 }
 
+main * {
+  font-size: 1.1rem;
+}
+
 .content-container {
   width: 76%;
   height: 100vh;
@@ -19,6 +23,8 @@ main {
 .top-about-me-section {
   display: flex;
   justify-content: start;
+  margin-top: 2%;
+  margin-bottom: 6%;
 }
 
 .image-container {
@@ -28,7 +34,7 @@ main {
   justify-content: center;
   height: 30vh;
   width: 30vh;
-  margin-right: 2%;
+  margin-right: 5%;
 }
 
 .image-container > img {
@@ -43,11 +49,56 @@ main {
   width: 50%;
 }
 
+.short-info-about-user > a:not(:last-child) {
+  width: fit-content;
+}
+
+.short-info-about-user > a:last-child {
+  margin-top: 3%;
+}
+
+.short-info-about-user > a:hover {
+  text-decoration: underline;
+}
+
+.short-about-me {
+  margin-bottom: 2%;
+}
+
 h1 {
   font-size: 5rem;
   /* padding: 6% 0 4% 0; */
+  line-height: 8rem;
 }
+
 h1::first-letter {
   text-transform: capitalize;
 }
 
+.edit-button {
+  text-align: center;
+  padding: 10px 0px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: hsla(296, 20%, 29%, 0.3);
+  border: 2px solid hsl(296, 20%, 29%);
+  border-radius: 5px;
+}
+
+.edit-button:hover {
+  background-color: hsla(296, 20%, 29%, 0.4);
+}
+
+.about-me-section {
+  
+}
+
+.about-me-section h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1%;
+  font-weight: 500;
+}
+
+.about-me-container {
+  
+}

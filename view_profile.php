@@ -18,55 +18,45 @@
     <section class="content-container">
       <section class="top-about-me-section">
         <div class="image-container">
-          <img src="images/profile-icon.png" alt="">
+          <img src="images/white-purple-profile-icon.png" alt="">
         </div>
         <div class="short-info-about-user">
           <h1><?php echo $_SESSION['username'] ?>'s profile</h1>
-          <!-- <p>
-            ?php echo $_SESSION['username'] ?>
-          </p> -->
-          
           <p class="short-about-me">
             <?php echo $result['short_about_me'] ?>
           </p>
-
-
           <a href="<?php echo $result['github_lenke'] ?>">
-            Github.com: 
+            <b>Github.com:</b>  
             <?php echo $result['github_lenke'] ?>
           </a>
-
           <a href="<?php echo $result['mail_lenke'] ?>">
-            Mail.com:
+            <b>Mail.com:</b>
             <?php echo $result['mail_lenke'] ?>
           </a>
-
           <a href="<?php echo $result['linkedin_lenke'] ?>">
-            LinkedIn.com:
+            <b>LinkedIn.com:</b>
             <?php echo $result['linkedin_lenke'] ?>
           </a>
-
-          <a href="edit_profile.php">
+          <a href="edit_profile.php" class="edit-button">
             Edit
           </a>
-
+        </div>
+      </section>
+      <section class="about-me-section">
+        <h2>
+          About me
+        </h2>
+        <div class="about-me-container">
+          <?php echo $result['about_me'] ?>
         </div>
       </section>
 
 
 
-      <div class="edit">
-      </div>
+
+
+
     </section>
-
-
-
-    <!-- <section class="right-side">
-      <h2>About me</h2>
-      <p>
-        ?php echo $result['about_me'] ?>
-      </p>
-    </section> -->
   </main>
 </body>
 </html>

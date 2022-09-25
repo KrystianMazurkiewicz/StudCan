@@ -13,23 +13,23 @@
       <h1>Edit Your Profile</h1>
       <form method="post" action="success_edit_profile.php">
         <label>
-          GitHub lenken
+          GitHub link
           <input type="text" name="github_lenke" placeholder="Type in your company's name" value="<?php echo $result['github_lenke'] ?>">
         </label>
         <label>
-          mail_lenke
+          Mail link
           <input type="text" name="mail_lenke" placeholder="Type in the title of this post" value="<?php echo $result['mail_lenke'] ?>">
         </label>
         <label>
-          linkedin_lenke
+          LinkedIn link
           <input type="text" name="linkedin_lenke" placeholder="Type in the title of this post" value="<?php echo $result['linkedin_lenke'] ?>">
         </label>
         <label>
-          short_about_me
+          Short summary about yourself
           <textarea name="short_about_me" placeholder="Fill in description for the internship" cols="30" rows="10"><?php echo $result['short_about_me'] ?></textarea>
         </label>
         <label>
-          about_me
+          About yourself
           <textarea name="about_me" placeholder="Fill in description for the internship" cols="30" rows="10"><?php echo $result['about_me']  ?></textarea>
         </label>
         <button type="submit" name="submit">Edit internship</button>
