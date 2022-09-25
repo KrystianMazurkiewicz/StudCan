@@ -100,6 +100,28 @@
       }
     }
 
+    // THIS IS THE SAME
+    // THIS IS THE SAME
+    // THIS IS THE SAME
+    // THIS IS THE SAME
+    // THIS IS THE SAME
+    // THIS IS THE SAME
+
+    public function publish_internship($id) {
+      try {
+        // HERE IS AN ERROR! THIS WILL ALLOW COMPANIES TO PUBLISH EVEN THO THEY ARE IN THE REVIEWED PROCESS!
+        $sql = "UPDATE `internships` SET `status` = 'published' WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':id', $id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
     public function getAllInternships() {
       try {
         $sql = "SELECT * FROM internships";
@@ -188,12 +210,12 @@
       }
     }
 
-    public function insert_applied_internship($post_id, $user_id) {
+    public function insert_applied_internship($user_id, $post_id) {
       try {
-        $sql = "INSERT INTO student_has_internship(user_id, internship_id) VALUES (:post_id, :user_id);";
+        $sql = "INSERT INTO student_has_internship(user_id, internship_id) VALUES (:user_id, :post_id);";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':post_id', $post_id);
         $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':post_id', $post_id);
         $stmt->execute();
         return true;
         
@@ -256,6 +278,21 @@
       try { 
         // SQL BELOW MIGHT GIVE ERROR BECAUSE OF 'OR' AT THE END!
         $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending' OR `status` = 'accepted'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':internship_id', $internship_id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }  
+    }
+
+    public function remove_student_from_internship($user_id, $internship_id) {
+      try { 
+        $sql = "DELETE FROM `student_has_internship` WHERE `user_id` = :user_id AND internship_id = :internship_id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':user_id', $user_id);
         $stmt->bindparam(':internship_id', $internship_id);

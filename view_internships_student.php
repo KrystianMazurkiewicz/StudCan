@@ -21,11 +21,24 @@
             </label>
           <?php endforeach; ?>
         </div>
-        <button id="search-for-internships">Search for internships</button>
+        <button id="search-for-internships" style="opacity: 0;">
+          Search for internships
+        </button>
       </form>
-      <p class="available-internships">37 internships available:</p>
+      <p class="available-internships">
+        <?php
+          $i = 0;
+          foreach($internships as $internship):
+            if($internship['status'] != 'published') continue;
+            $i++;
+          endforeach;
+          echo $i;
+        ?>
+        internships available:
+      </p>
       <section>
         <?php foreach($internships as $internship): ?>
+          <?php if($internship['status'] == 'archived') continue ?>
         <!-- <input type="hidden" name="post_id" value="?php echo $internship['id'] ?>"> -->
         <article class="firma-container">
           <div class="firma">

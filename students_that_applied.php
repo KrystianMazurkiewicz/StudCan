@@ -97,7 +97,9 @@
               <?php foreach ($students as $student) : ?>
                 <div class="column">
                   <div class="row">
-                    <?php echo $user->get_username_by_id($student['user_id'])[0] ?>
+                    <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
+                      <?php echo $user->get_username_by_id($student['user_id'])[0] ?>
+                    </a>
                   </div>
                   <div class="row">
                     <?php echo $student['status'] ?>

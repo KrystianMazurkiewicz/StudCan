@@ -9,6 +9,13 @@
           </p>
         </a>
       </li>
+      <li ' . (($title == 'not_published_internships') ? 'class="active"' : '') . '>
+        <a href="' . (($title == 'not_published_internships') ? '' : 'not_published_internships.php') . '">
+          <p class="nav-tag">
+            Unpublished Interships
+          </p>
+        </a>
+      </li>
       <li ' . (($title == 'members') ? 'class="active"' : '') . '>
         <a href="' . (($title == 'members') ? '' : 'members.php') . '">
           <p class="nav-tag">

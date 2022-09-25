@@ -6,6 +6,7 @@
   $post_ids = $crud->get_applied_internship($_SESSION['user_id']);
   // $users = $user->getUsers();
   // $tags = $crud->getAllPossibleTags();
+  // $tags = $crud->getAllPossibleTags();
 ?>
 
   <main>
@@ -29,7 +30,11 @@
           Cancelled
         </label>
       </div>
-      <p class="available-internships">3 internships:</p>
+      <p class="available-internships">
+        You showed interest in
+        <?php echo count($post_ids) ?>
+        internships:
+      </p>
       <section class="list-of-your-internships">
         
       </section>
@@ -109,7 +114,10 @@
       people_applied.append(strong_2)
       
       const a_2 = document.createElement('a')
-      a_2.href = 'success_send_application?id=' + post['co_name'] + '.php'
+      a_2.onclick = () => {
+        return confirm("Are you sure you want to remove yourself from this internship?")
+      }
+      a_2.href = 'success_remove_student_from_internship.php?i-id=' + post['id']
       firma_container.append(a_2)
 
       const send_application = document.createElement('button')

@@ -95,19 +95,19 @@
                 Unarchive
               </a>
             <?php } else { ?>
-            <a 
-              href="edit_internship.php?id=<?php echo $internship['id'] ?>" 
-              class="edit-button"
-            >
-              Edit
-            </a>
-            <a 
-              onclick="return confirm('Are you sure you want to delete this post?')"
-              href="success_archive_internship.php?id=<?php echo $internship['id'] ?>"
-              class="delete-button"
-            >
-              Delete
-            </a>
+              <a 
+                href="edit_internship.php?id=<?php echo $internship['id'] ?>" 
+                class="edit-button"
+              >
+                Edit
+              </a>
+              <a 
+                onclick="return confirm('Are you sure you want to delete this post?')"
+                href="success_archive_internship.php?id=<?php echo $internship['id'] ?>"
+                class="delete-button"
+              >
+                Archive
+              </a>
             <?php } ?>
           </div>
         </article>

@@ -9,7 +9,7 @@
   }
 
   if ($isSuccess) {
-    $crud->insert_applied_internship($id, $_SESSION['user_id']);
+    $crud->insert_applied_internship($_SESSION['user_id'], $id);
     header("Location: view_internships_student.php");
   } else {
     echo "didnt work";
