@@ -85,7 +85,7 @@
           text-transform: capitalize; 
         }
       </style>
-
+      
       <?php $students = $user->get_student_that_is_interested_in_internship($internship['id']) ?>
 
       <section class="list-of-members">
