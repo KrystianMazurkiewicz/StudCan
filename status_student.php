@@ -3,10 +3,9 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $post_ids = $crud->get_applied_internship($_SESSION['user_id']);
-  // $users = $user->getUsers();
-  // $tags = $crud->getAllPossibleTags();
-  // $tags = $crud->getAllPossibleTags();
+  // $post_ids = $crud->get_applied_internship($_SESSION['user_id']);
+  $internship_ids = $crud->get_post_ids_for_student($_SESSION['user_id']); // 1, 2
+  // $internships = $crud->get_internships_for_student($_SESSION['user_id']);
 ?>
 
   <main>
@@ -34,117 +33,145 @@
 
       <p class="available-internships">
         You showed interest in
-        <?php echo count($post_ids) ?>
+        <?php echo count($internship_ids) ?>
         internships:
       </p>
       <section class="list-of-your-internships">
+      <?php foreach($internship_ids as $internship_id): ?>
+        <?php $internship = $crud->get_internship_by_id($internship_id['internship_id']) ?>
+        <?php 
+          $internship_status = $crud->get_internship_status_to_user($_SESSION['user_id'], $internship['id']);
+        ?>
         
+        <!-- ?php if($internship['status'] == 'published') continue ?> -->
+        <article class="firma-container">
+          <div class="firma" style="position: relative;">
+            <h2 class="title-for-job-description">
+              <?php echo $internship['post_title'] ?>
+            </h2>
+            <p class="job-description">
+              <?php echo $internship['post_description'] ?>
+              <?php if($internship['post_description'] == '') echo
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?'; 
+              ?>
+            </p>
+            <div class="bottom-section">
+              <div class="hashtags">
+                <span class="hashtag">CSS</span>
+                <span class="hashtag">HTML</span>
+              </div>
+              <div class="company-and-people-applied">
+                <div class="company">
+                  Co.: 
+                  <strong>
+                    <a href="<?php echo $internship['co_website'] ?>">
+                      <?php echo $internship['co_name'] ?>
+                    </a>
+                  </strong>
+                </div>
+                <div class="people-applied">
+                  <strong>
+                    <?php if($internship['ppl_applied'] > 10) echo 'Under 10 people' ?>
+                    <?php if($internship['ppl_applied'] == 10) echo '10 people' ?>
+                    <?php if($internship['ppl_applied'] < 10) echo 'Over 10 people' ?>
+                  </strong>
+                  have applied
+                </div>
+              </div>
+
+
+              <style>
+                .publish-decline-button-container {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-evenly;
+                  padding-bottom: 20px;
+                }
+
+                .button {
+                  padding: 10px 20px;
+                  border-radius: 10px;
+                  color: white;
+                }
+
+                .button:hover {
+                  color: lightgrey;                  
+                }
+
+                .publish-button {
+                  background-color: green;                  
+                }
+                
+                .decline-button {
+                  background-color: #583C5A;
+                }
+                
+              </style>
+
+
+                <!-- SHOULD THIS BE HERE? SHOULD ADMIN HAVE THE POWER TO PUBLISH ARCHIVED POSTS? -> BECAUSE COMPANY IS UNABLE TO??? -->
+              <?php if ($internship['status'] == 'reviewed') { ?>
+              <div class="publish-decline-button-container">
+                <a href="success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
+                  Publish
+                </a>
+                <a href="success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
+                  Decline
+                </a>
+              </div>
+              <?php } ?>
+
+
+
+
+
+
+            </div>
+
+          <style>
+            .overlay-status {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 4rem;
+            }
+
+            .color {
+              background-color: rgba(230, 230, 230, 0.677);
+              font-weight: 500;
+              text-shadow: 0px 11px 10px grey;
+              text-transform: capitalize;
+            }
+          </style>
+
+          <style>
+            .firma:hover .overlay-status {
+              display: none;
+            }
+          </style>
+
+          <div class="overlay-status">
+            <div class="overlay-status color">
+            <?php echo $internship_status['status'] ?>
+
+              <!-- ?php if ($internship['status'] == 'reviewed') echo 'To be' ?>
+              ?php echo $internship['status'] ?> -->
+            </div>
+          </div>
+
+
+
+          </div>
+        </article>
+        <?php endforeach; ?>
       </section>
     </section>
   </main>
-
-  <script>
-    const list_of_your_internships = document.querySelector(".list-of-your-internships")
-    const internshipsArrayJS = [
-      <?php foreach($post_ids as $post_id):
-        $this_post = $crud->get_internship($post_id['internship_id']);
-        echo '{
-          id: "' . $this_post[0]['id'] . '",
-          co_name: "' . $this_post[0]['co_name'] . '",
-          post_title: "' . $this_post[0]['post_title'] . '",
-          post_description: `' . $this_post[0]['post_description'] . '`,
-          hashtags: `' . $this_post[0]['hashtags'] . '`,
-          ppl_applied: `' . $this_post[0]['ppl_applied'] . '`,
-          co_website: `' . $this_post[0]['co_website'] . '`,
-        },';
-      endforeach ?>
-    ]
-
-    function buildTable(post) {
-      const firma_container = document.createElement('article')
-      firma_container.classList.add('firma-container')
-      
-      const firma = document.createElement('div')
-      firma.classList.add('firma')
-      firma_container.append(firma)
-
-      const title_for_job_description = document.createElement('h2')
-      title_for_job_description.classList.add('title-for-job-description')
-      title_for_job_description.innerText = post['post_title']
-      firma.append(title_for_job_description)
-      
-      const job_description = document.createElement('p')
-      job_description.classList.add('job-description')
-      job_description.innerText = post['post_description']
-      firma.append(job_description)
-      
-      const bottom_section = document.createElement('div')
-      bottom_section.classList.add('bottom-section')
-      firma.append(bottom_section)
-
-      const hashtags = document.createElement('div')
-      hashtags.classList.add('hashtags')
-      bottom_section.append(hashtags)
-      
-      // Skipped hashtags
-      
-      const company_and_people_applied = document.createElement('div')
-      company_and_people_applied.classList.add('company-and-people-applied')
-      bottom_section.append(company_and_people_applied)
-
-      const company = document.createElement('div')
-      company.classList.add('company')
-      company.innerText = 'Co.: '
-      company_and_people_applied.append(company)
-      
-      const strong = document.createElement('strong')
-      strong.classList.add('company')
-      company.append(strong)
-      
-      const a = document.createElement('a')
-      a.href = post['co_website']
-      a.innerText = post['co_name']
-      strong.append(a)
-      
-      const people_applied = document.createElement('div')
-      people_applied.classList.add('people-applied')
-      company_and_people_applied.append(people_applied)
-      
-      const strong_2 = document.createElement('strong')
-      // Missing logic
-      strong_2.innerText = 'Under 10 people have applied'
-      people_applied.append(strong_2)
-      
-      const a_2 = document.createElement('a')
-      a_2.onclick = () => {
-        return confirm("Are you sure you want to remove yourself from this internship?")
-      }
-      a_2.href = 'success_remove_student_from_internship.php?i-id=' + post['id']
-      firma_container.append(a_2)
-
-      const send_application = document.createElement('button')
-      send_application.classList.add('send-application')
-      a_2.append(send_application)
-
-      list_of_your_internships.append(firma_container)
-    }
-    
-    function show_internships() {
-      list_of_your_internships.innerText = ""
-
-      loop1: for (let i = 0; i < internshipsArrayJS.length; i++) {
-        let checkedBoxes = document.querySelectorAll('input:checked')
-
-        for (let j = 0; j < checkedBoxes.length; j++) {
-          // if (checkedBoxes[j].name == internshipsArrayJS[i]['role'] || i == 0) {
-            buildTable(internshipsArrayJS[i])
-            continue loop1
-          // }
-        }
-      }
-    }
-    show_internships()
-  </script>
 
   <!-- <footer>
     Copyright 2022
