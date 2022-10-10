@@ -3,9 +3,9 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $internships = $crud->getAllInternships();
-  $tags = $crud->getAllPossibleTags();
-  $users = $user->getUsers();
+  $internships = $read->getAllInternships();
+  $tags = $read->getAllPossibleTags();
+  $users = $read->getUsers();
 ?>
 
 <main>
@@ -66,7 +66,7 @@
                 </div>
                 <a class="people-applied" href="students_that_applied.php?id=<?php echo $internship['id'] ?>">
                   <b>
-                    <?php echo count($user->get_student_that_is_interested_in_internship($internship['id'])) ?>
+                    <?php echo count($read->get_student_that_is_interested_in_internship($internship['id'])) ?>
                     people
                   </b>
                   have applied
@@ -89,7 +89,7 @@
           <div class="button-container">
             <?php if ($internship['status'] == 'archived') { ?>
               <a
-                href="success_unarchive_internship.php?id=<?php echo $internship['id'] ?>" 
+                href="success/success_unarchive_internship.php?id=<?php echo $internship['id'] ?>" 
                 class="edit-button"
               >
                 Unarchive
@@ -103,7 +103,7 @@
               </a>
               <a 
                 onclick="return confirm('Are you sure you want to delete this post?')"
-                href="success_archive_internship.php?id=<?php echo $internship['id'] ?>"
+                href="success/success_archive_internship.php?id=<?php echo $internship['id'] ?>"
                 class="delete-button"
               >
                 Archive
@@ -114,7 +114,11 @@
       <?php endforeach; ?>
     </section>
   </section>
+
+  <?php include_once 'inc/feedback_message.php' ?>
+
 </main>
+
 
 <!-- <div class="modal" id="modal">
   <div class="modal-header">
@@ -122,7 +126,7 @@
     <button data-close-button class="close-button">&times;</button>
   </div>
   <div class="modal-body">
-    <form method="POST" action="success_invite_student_to_project.php">
+    <form method="POST" action="success/success_invite_student_to_project.php">
       <input type="hidden" id="user_username" name="user_username">
       <input type="hidden" id="post_title_input" name="post_title">
       Either accept or remove a student from this project.

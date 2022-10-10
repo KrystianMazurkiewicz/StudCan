@@ -3,23 +3,30 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $internships = $crud->getAllInternships();
-  // $students = $user->get_student_that_is_interested_in_internship();
-  $tags = $crud->getAllPossibleTags();
+  $internships = $read->getAllInternships();
+  // $students = $read->get_student_that_is_interested_in_internship();
+  $tags = $read->getAllPossibleTags();
 
 ?>
 
+<!-- make it so that only 3 students are displayed and then the rest need to be shown once you click on the student count in the bottom right -->
+
   <main>
     <section class="content-container">
-      <h1>Practical IT-project</h1>
-      <p>Choose areas you want to work in/with:</p>
+      <!-- <h1>Practical IT-project</h1> -->
+      <h1>Available internships</h1>
+      <!-- <p>Choose areas you want to work in/with:</p> -->
+      <!-- <p>Filter by areas of work that are most suitable for certain internship:</p> -->
+      <p style="font-weight: bold;">Filter by areas of work:</p>
       <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
         <div class="hashtag-options">
           <?php foreach($tags as $tag): ?>
+            <?php if ($tag['name'] == 'admin' || $tag['name'] == 'organization' || $tag['name'] == 'student') {} else { ?>
             <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
               <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
               <?php echo $tag['name'] ?>
             </label>
+            <?php } ?>
           <?php endforeach; ?>
         </div>
         <button id="search-for-internships" style="opacity: 0;">Search for internships</button>
@@ -99,7 +106,7 @@
               }
             </style>
 
-            <?php $students = $user->get_student_that_is_interested_in_internship($internship['id']) ?>
+            <?php $students = $read->get_student_that_is_interested_in_internship($internship['id']) ?>
 
             <section class="list-of-members">
               <h3 style="margin-bottom: 10px;">
@@ -111,7 +118,7 @@
                 <div class="column">
                   <div class="row">
                     <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
-                      <?php echo $user->get_username_by_id($student['user_id'])[0] ?>
+                      <?php echo $read->get_username_by_id($student['user_id'])[0] ?>
                     </a>
                   </div>
                   <div class="row">
@@ -129,6 +136,9 @@
         </section>
       </section>
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+
   </main>
 
   <!-- <footer>

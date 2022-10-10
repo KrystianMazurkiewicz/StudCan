@@ -4,9 +4,9 @@
   require_once 'inc/header.php';
 
   if(isset($_GET['id'])) {
-    $internships = $crud->get_internship_by_id($_GET['id']);
-    $students = $user->get_student_that_is_interested_in_internship($_GET['id']);
-    $tags = $crud->getAllPossibleTags();
+    $internships = $read->get_internship_by_id($_GET['id']);
+    $students = $read->get_student_that_is_interested_in_internship($_GET['id']);
+    $tags = $read->getAllPossibleTags();
   } else {
     header("Location: internships_company.php");
   }
@@ -84,9 +84,16 @@
               }
 
               .button {
-                background-color: #583c5a50;
+                /* background-color: #583c5a50; */
+                background-color: #583C5A;
+                color: white;
                 padding: 4px 10px;
                 border-radius: 4px;
+              }
+              
+              .button:hover {
+                background-color: #78457B;
+                color: white;
               }
             </style>
 
@@ -98,20 +105,20 @@
                 <div class="column">
                   <div class="row">
                     <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
-                      <?php echo $user->get_username_by_id($student['user_id'])[0] ?>
+                      <?php echo $read->get_username_by_id($student['user_id'])[0] ?>
                     </a>
                   </div>
                   <div class="row">
                     <?php echo $student['status'] ?>
                     <div class="buttons-container">
                       <a 
-                        href="success_accept_student_to_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['user_id'] ?>" 
+                        href="success/success_accept_student_to_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['user_id'] ?>" 
                         class="accept-student button"
                       >
                         Accept student
                       </a>
                       <a 
-                        href="success_remove_student_from_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['user_id'] ?>" 
+                        href="success/success_remove_student_from_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['user_id'] ?>" 
                         class="remove-student button"
                       >
                         Remove student
@@ -125,6 +132,9 @@
         </article>
       </section>
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+
   </main>
 
   <!-- <footer>

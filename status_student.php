@@ -3,14 +3,13 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  // $post_ids = $crud->get_applied_internship($_SESSION['user_id']);
-  $internship_ids = $crud->get_post_ids_for_student($_SESSION['user_id']); // 1, 2
-  // $internships = $crud->get_internships_for_student($_SESSION['user_id']);
+  $internship_ids = $read->get_post_ids_for_student($_SESSION['user_id']); // 1, 2
 ?>
 
   <main>
     <section class="content-container">
       <h1>Your internships</h1>
+      <p style="font-weight: bold;">Filter by status:</p>
       <div class="hashtag-options" onclick="showMembers()">
         <label for="interested" class="hashtag-option">
           <input type="checkbox" checked name="interested" id="interested">
@@ -38,9 +37,9 @@
       </p>
       <section class="list-of-your-internships">
       <?php foreach($internship_ids as $internship_id): ?>
-        <?php $internship = $crud->get_internship_by_id($internship_id['internship_id']) ?>
-        <?php 
-          $internship_status = $crud->get_internship_status_to_user($_SESSION['user_id'], $internship['id']);
+        <?php
+          $internship = $read->get_internship_by_id($internship_id['internship_id']);
+          $internship_status = $read->get_internship_status_to_user($_SESSION['user_id'], $internship['id']);
         ?>
         
         <!-- ?php if($internship['status'] == 'published') continue ?> -->
@@ -51,7 +50,7 @@
             </h2>
             <p class="job-description">
               <?php echo $internship['post_description'] ?>
-              <?php if($internship['post_description'] == '') echo
+              <?php if ($internship['post_description'] == '') echo
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?'; 
               ?>
             </p>
@@ -71,9 +70,9 @@
                 </div>
                 <div class="people-applied">
                   <strong>
-                    <?php if($internship['ppl_applied'] > 10) echo 'Under 10 people' ?>
-                    <?php if($internship['ppl_applied'] == 10) echo '10 people' ?>
-                    <?php if($internship['ppl_applied'] < 10) echo 'Over 10 people' ?>
+                    <?php if ($internship['ppl_applied'] > 10) echo 'Under 10 people' ?>
+                    <?php if ($internship['ppl_applied'] == 10) echo '10 people' ?>
+                    <?php if ($internship['ppl_applied'] < 10) echo 'Over 10 people' ?>
                   </strong>
                   have applied
                 </div>
@@ -112,10 +111,10 @@
                 <!-- SHOULD THIS BE HERE? SHOULD ADMIN HAVE THE POWER TO PUBLISH ARCHIVED POSTS? -> BECAUSE COMPANY IS UNABLE TO??? -->
               <?php if ($internship['status'] == 'reviewed') { ?>
               <div class="publish-decline-button-container">
-                <a href="success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
+                <a href="success/success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
                   Publish
                 </a>
-                <a href="success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
+                <a href="success/success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
                   Decline
                 </a>
               </div>
@@ -171,6 +170,9 @@
         <?php endforeach; ?>
       </section>
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+
   </main>
 
   <!-- <footer>

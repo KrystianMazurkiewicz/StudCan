@@ -1,6 +1,4 @@
 <?php
-  // $title = 'view_internships_student';
-  // require_once 'inc/header.php';
   require_once 'db/conn.php';
 ?>
 
@@ -20,18 +18,28 @@
       justify-content: center;
       height: 100vh;
     }
+    
     main > * {
       transform: scale(5);
     }
   </style>
 
+<!-- TULPESH NEEDS TO BE ABLE TO CHANGE STATUS FOR CERTAIN STUDENTS IF SOMETHING GOES WRONG -->
+
   <main>
     <section class="content-container">
       <h1>Login</h1>
-      <form method="post" action="success_login.php">
+      <form method="post" action="success/success_login.php">
         <label>
           Username
-          <input style="padding: 20px" required type="text" name="username" placeholder="Type in your username" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['username'] ?>">
+          <input 
+            style="padding: 20px" 
+            required 
+            type="text" 
+            name="username" 
+            placeholder="Type in your username" 
+            value="<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['username'] ?>"
+          >
         </label>
         <!-- <label>
           Password
@@ -41,5 +49,8 @@
       </form>
     </section>
   </main>
+    
+  <?php include_once 'inc/feedback_message.php' ?>
+
 </body>
 </html>

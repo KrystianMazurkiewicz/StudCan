@@ -3,15 +3,16 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $users = $user->getUsers();
+  $users = $read->getUsers();
   // This should be dynamic
-  $internships = $crud->get_all_internships_from_company("Oslomet");
-  $tags = $crud->getAllPossibleTags();
+  $internships = $read->get_all_internships_from_company("Oslomet");
+  $tags = $read->getAllPossibleTags();
 ?>
 
   <main>
     <section class="content-container">
       <h1>Members</h1>
+      <p style="font-weight: bold;">Filter by member type:</p>
       <div class="hashtag-options" onclick="showMembers(clicked = true)">
         <?php foreach($tags as $tag): ?>
           <?php if ($tag['id'] < 13) continue ?>
@@ -30,6 +31,10 @@
         
       </section>
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+
+  
   </main>
 
   <div class="modal" id="modal">
@@ -38,11 +43,11 @@
       <button data-close-button class="close-button">&times;</button>
     </div>
     <div class="modal-body">
-      <form method="POST" action="success_invite_student_to_project.php">
+      <form method="POST" action="success/success_invite_student_to_project.php">
         <input type="hidden" id="user_username" name="user_username">
         <input type="hidden" id="post_title_input" name="post_title">
         Choose project you want the student to get invited to:
-        <select id="post_title" onclick="doSome()">
+        <select id="post_title" <?php if ($_SESSION['role'] == 'organization') {  echo 'onclick="doSome()"'; } ?>>
           <?php foreach($internships as $internship): ?> 
             <option value="<?php echo $internship['post_title'] ?>"><?php echo $internship['post_title'] ?></option>
           <?php endforeach; ?>
@@ -52,6 +57,9 @@
     </div>
   </div>
   <div id="overlay"></div>
+
+  
+
 
   <script>
     function doSome() {
@@ -161,6 +169,7 @@
     }
     showMembers()
 
+    <?php if ($_SESSION['role'] == 'organization') { ?>
     let openModalButtons = document.querySelectorAll('[data-modal-target]')
     let closeModalButtons = document.querySelectorAll('[data-close-button]')
     const overlay = document.getElementById('overlay')
@@ -198,6 +207,7 @@
       modal.classList.remove('active')
       overlay.classList.remove('active')
     }
+    <?php } ?>
   </script>
 
   <!-- <footer>

@@ -3,26 +3,26 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $internships = $crud->getAllInternships();
-  // $students = $user->get_student_that_is_interested_in_internship();
-  $tags = $crud->getAllPossibleTags();
+  $internships = $read->getAllInternships();
+  // $students = $read->get_student_that_is_interested_in_internship();
+  $tags = $read->getAllPossibleTags();
 
 ?>
 
   <main>
     <section class="content-container">
       <h1>Practical IT-project</h1>
-      <p>Choose areas you want to work in/with:</p>
-      <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+      <!-- <p>Choose areas you want to work in/with:</p>
+      <form action="?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
         <div class="hashtag-options">
-          <?php foreach($tags as $tag): ?>
-            <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
-              <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
-              <?php echo $tag['name'] ?>
+          ?php foreach($tags as $tag): ?>
+            <label for="?php echo $tag['name'] ?>" class="hashtag-option">
+              <input type="checkbox" checked name="?php echo $tag['name'] ?>" id="?php echo $tag['name'] ?>">
+              ?php echo $tag['name'] ?>
             </label>
-          <?php endforeach; ?>
+          ?php endforeach; ?>
         </div>
-        <button id="search-for-internships" style="opacity: 0;">Search for internships</button>
+        <button id="search-for-internships" style="opacity: 0;">Search for internships</button> -->
       </form>
       <p class="available-internships">
       <?php
@@ -104,11 +104,11 @@
                 <!-- SHOULD THIS BE HERE? SHOULD ADMIN HAVE THE POWER TO PUBLISH ARCHIVED POSTS? -> BECAUSE COMPANY IS UNABLE TO??? -->
               <?php if ($internship['status'] == 'reviewed') { ?>
               <div class="publish-decline-button-container">
-                <a href="success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
-                  Publish
+                <a href="success/success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
+                  Publish this internship
                 </a>
-                <a href="success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
-                  Decline
+                <a href="success/success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
+                  Decline this internship
                 </a>
               </div>
               <?php } ?>
@@ -207,6 +207,9 @@
         </section>
       </section>
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+
   </main>
 
   <!-- <footer>

@@ -15,9 +15,13 @@
     throw new PDOException($e->getMessage());
   }
 
-  require_once 'crud.php';
-  require_once 'user.php';
-  $crud = new crud($pdo);
-  $user = new user($pdo);
+  require_once 'create.php';
+  require_once 'read.php';
+  require_once 'update.php';
+  require_once 'delete.php';
+  $create = new create($pdo);
+  $read   = new read($pdo);
+  $update = new update($pdo);
+  $delete = new delete($pdo);
 
 ?>

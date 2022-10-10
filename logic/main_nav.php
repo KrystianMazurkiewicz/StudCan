@@ -3,7 +3,7 @@
     echo '
     <ul>
       <li ' . (($title == 'index_admin') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'index_admin') ? '' : 'index_admin.php') . '">
+        <a href="' . (($title == 'index_admin') ? '' : 'index2.php') . '">
           <p class="nav-tag">
             Published Interships
           </p>
@@ -36,7 +36,7 @@
     echo '
     <ul>
       <li ' . (($title == 'internships_company') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'internships_company') ? '' : 'internships_company.php') . '">
+        <a href="' . (($title == 'internships_company') ? '' : 'index2.php') . '">
           <p class="nav-tag">
             Your Posts
           </p>
@@ -69,7 +69,7 @@
     echo '
     <ul>
       <li ' . (($title == 'view_internships_student') ? 'class="active"' : '') . '>
-        <a href="' . (($title == 'view_internships_student') ? '' : 'view_internships_student.php') . '">
+        <a href="' . (($title == 'view_internships_student') ? '' : 'index2.php') . '">
           <p class="nav-tag">
             Available Interships
           </p>

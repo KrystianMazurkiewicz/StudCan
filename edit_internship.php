@@ -5,9 +5,9 @@
     
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $isSuccess = $crud->get_internship($id);
+    $isSuccess = $read->get_internship($id);
   } else {
-    header("Location: internships_company.php");
+    header("Location: ../internships_company.php");
   }
   
   if ($isSuccess) {
@@ -23,7 +23,7 @@
   <main>
     <section class="content-container">
       <h1>Edit Internship</h1>
-      <form method="post" action="success_edit.php">
+      <form method="post" action="success/success_edit_internship.php">
         <input type="hidden" name="id" value="<?php echo $id ?>">
         <label>
           Company name
@@ -45,5 +45,8 @@
       </form>
     </section>
   </main>
+    
+  <?php include_once 'inc/feedback_message.php' ?>
+
 </body>
 </html>

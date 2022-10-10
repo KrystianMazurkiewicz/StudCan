@@ -4,21 +4,25 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $internships = $crud->getAllInternships();
-  $tags = $crud->getAllPossibleTags();
+  $internships = $read->getAllInternships();
+  $tags = $read->getAllPossibleTags();
 ?>
 
   <main>
     <section class="content-container">
-      <h1>Practical IT-project</h1>
-      <p>Choose areas you want to work in/with:</p>
+      <!-- <h1>Practical IT-project</h1> -->
+      <h1>Available internships</h1>
+      <!-- <p>Choose areas you want to work in/with:</p> -->
+      <p style="font-weight: bold;">Filter by areas of work:</p>
       <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
         <div class="hashtag-options">
           <?php foreach($tags as $tag): ?>
+            <?php if ($tag['name'] == 'admin' || $tag['name'] == 'organization' || $tag['name'] == 'student') {} else { ?>
             <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
               <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
               <?php echo $tag['name'] ?>
             </label>
+            <?php } ?>
           <?php endforeach; ?>
         </div>
         <button id="search-for-internships" style="opacity: 0; height: 0px; margin: 0px;">
@@ -46,10 +50,10 @@
               <?php echo $internship['post_title'] ?>
             </h2>
             <p class="job-description">
-              <?php echo $internship['post_description'] ?>
-              <?php if($internship['post_description'] == '') echo
+              <!-- ?php echo $internship['post_description'] ?>
+              ?php if($internship['post_description'] == '') echo
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?'; 
-              ?>
+              ?> -->
             </p>
             <div class="bottom-section">
               <div class="hashtags">
@@ -122,13 +126,17 @@
           
 
           </div>
-          <a href="success_send_application.php?id=<?php echo $internship['id'] ?>">
+          <a href="success/success_send_application.php?id=<?php echo $internship['id'] ?>">
             <button class="send-application" alt="Send application"></button>
           </a>
         </article>
         <?php endforeach; ?>
       </section>
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+
+
   </main>
 
   <!-- <footer>

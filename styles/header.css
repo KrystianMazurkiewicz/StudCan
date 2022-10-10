@@ -242,6 +242,7 @@ nav.menu-container {
   bottom: 0;
   background-color: rgba(0, 0, 0, .5);
   pointer-events: none;
+  z-index: 1;
 }
 
 #overlay.active {
@@ -285,4 +286,31 @@ nav.menu-container {
 
 .row {
   width: 100%;
+}
+
+.success-message-container {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  padding: 20px 40px;
+  border: .1rem solid #598b21;
+  background-color: #B9F4A9;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  animation: fadeOutMessage 5s forwards;
+}
+
+.failed-message {
+  border: .1rem solid #c35048;
+  background-color: #f2ccc5;
+}
+
+@keyframes fadeOutMessage {
+  0% {}
+  50% {opacity: 1;}
+  100% {opacity: 0;display: none;}
 }

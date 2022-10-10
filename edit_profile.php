@@ -5,13 +5,13 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $result = $user->get_info_about_profile($_SESSION['user_id']);
+  $result = $read->get_info_about_profile($_SESSION['user_id']);
 ?>
 
   <main>
     <section class="content-container">
       <h1>Edit Your Profile</h1>
-      <form method="post" action="success_edit_profile.php">
+      <form method="post" action="success/success_edit_profile.php">
         <label>
           GitHub link
           <input type="text" name="github_lenke" placeholder="Type in your company's name" value="<?php echo $result['github_lenke'] ?>">
@@ -32,9 +32,13 @@
           About yourself
           <textarea name="about_me" placeholder="Fill in description for the internship" cols="30" rows="10"><?php echo $result['about_me']  ?></textarea>
         </label>
-        <button type="submit" name="submit">Edit internship</button>
+        <button type="submit" name="submit">Edit Your Profile</button>
       </form>
     </section>
   </main>
+    
+  <?php include_once 'inc/feedback_message.php' ?>
+
+  
 </body>
 </html>

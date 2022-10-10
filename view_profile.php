@@ -4,12 +4,12 @@
   require_once 'inc/header.php';
 
   if (isset($_GET['user_id'])) {
-    $result = $user->get_info_about_profile($_GET['user_id']);
+    $result = $read->get_info_about_profile($_GET['user_id']);
   } else {
-    $result = $user->get_info_about_profile($_SESSION['user_id']);
+    $result = $read->get_info_about_profile($_SESSION['user_id']);
   }
 
-  $internships = $crud->getAllInternships();
+  $internships = $read->getAllInternships();
 
 
 
@@ -86,27 +86,32 @@
         }
       </style>
       
-      <?php $students = $user->get_student_that_is_interested_in_internship($internship['id']) ?>
+      <?php 
+        if (isset($internship['id'])) {
+          $students = $read->get_student_that_is_interested_in_internship($internship['id']);
+        ?>
+        <section class="list-of-members">
+          <h3 style="margin-bottom: 10px;">
+            Students interested in this internship:
+          </h3>
+          <?php if (!$students) echo 'No one applied to this internship yet.'; ?>
+          <?php foreach ($students as $student) : ?>
+            <!-- ?php echo $student['user_id'] ?> -->
+            <div class="column">
+              <div class="row">
+                <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
+                  <?php echo $read->get_username_by_id($student['user_id'])[0] ?>
+                </a>
+              </div>
+              <div class="row">
+                <?php echo $student['status'] ?>
+              </div>
+            </div>
+          <?php endforeach ?>
+        </section>
+      <?php } ?>
 
-      <section class="list-of-members">
-        <h3 style="margin-bottom: 10px;">
-          Students interested in this internship:
-        </h3>
-        <?php if (!$students) echo 'No one applied to this internship yet.'; ?>
-        <?php foreach ($students as $student) : ?>
-          <!-- ?php echo $student['user_id'] ?> -->
-          <div class="column">
-            <div class="row">
-              <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
-                <?php echo $user->get_username_by_id($student['user_id'])[0] ?>
-              </a>
-            </div>
-            <div class="row">
-              <?php echo $student['status'] ?>
-            </div>
-          </div>
-        <?php endforeach ?>
-      </section>
+
       </section>
 
 
@@ -115,6 +120,10 @@
 
 
     </section>
+    
+    <?php include_once 'inc/feedback_message.php' ?>
+  
+  
   </main>
 </body>
 </html>
