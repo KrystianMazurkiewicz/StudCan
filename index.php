@@ -49,8 +49,5 @@
       </form>
     </section>
   </main>
-    
-  <?php include_once 'inc/feedback_message.php' ?>
-
 </body>
 </html>
