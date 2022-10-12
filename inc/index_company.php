@@ -3,7 +3,7 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $internships = $read->getAllInternships();
+  $internships = $read->get_company_internships($_SESSION['username']);
   $tags = $read->getAllPossibleTags();
   $users = $read->getUsers();
 ?>
@@ -12,13 +12,7 @@
   <section class="content-container">
     <h1>Your Company's Internships</h1>
     <p class="available-internships">
-      <?php
-        $i = 0;
-        foreach($internships as $internship):
-          if ($internship['co_name'] == 'Oslomet') $i++;
-        endforeach;
-      ?>
-      You created <?php echo $i ?> internships:
+      You created <?php echo count($internships) ?> internships:
     </p>
 
     <style>
@@ -33,7 +27,6 @@
 
     <section>
       <?php foreach ($internships as $internship) : ?>
-        <?php if ($internship['co_name'] != 'Oslomet') continue ?>
         <article class="firma-container">
           <input type="hidden" name="id" value="<?php echo $internship['id'] ?>">
           <div class="firma <?php echo $internship['status'] ?>">

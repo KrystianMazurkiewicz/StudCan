@@ -8,7 +8,9 @@
     $user_username = $_POST['user_username'];
     $post_title = $_POST['post_title'];
     $internship_id = $read->get_internship_id_from_company_by_post_title($post_title);
+    echo $user_username;
     $user_id = $read->get_user_id_by_username($user_username);
+    // echo $user_id;
     $isSuccess = $create->insert_invitation_from_company($user_id['id'], $internship_id['id'], 'invited');
   }
 
@@ -17,6 +19,6 @@
     header("Location: ../members.php");
   } else {
     $_SESSION['feedback_message'] = "Something have failed!";
-    header("Location: ../members.php");
+    // header("Location: ../members.php");
   }
 ?>

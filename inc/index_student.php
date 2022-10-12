@@ -50,10 +50,10 @@
               <?php echo $internship['post_title'] ?>
             </h2>
             <p class="job-description">
-              <!-- ?php echo $internship['post_description'] ?>
-              ?php if($internship['post_description'] == '') echo
+              <?php echo $internship['post_description'] ?>
+              <?php if($internship['post_description'] == '') echo
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam mollitia id nostrum alias voluptatem impedit natus perspiciatis, tenetur asperiores quas voluptas eos ipsam voluptatibus similique iure commodi ratione obcaecati inventore culpa modi provident sequi necessitatibus? Atque, nihil rerum. Voluptatem velit a odit ipsa error maiores distinctio perspiciatis expedita ullam blanditiis hic architecto eligendi quas, debitis, dolor magni corrupti sed atque?'; 
-              ?> -->
+              ?>
             </p>
             <div class="bottom-section">
               <div class="hashtags">

@@ -65,7 +65,7 @@ h1 {
 .column {
   width: 100%;
   padding: 10px;
-  display: flex;
+  display: none;
   justify-content: space-evenly;
 }
 
@@ -77,14 +77,25 @@ h1 {
   color: white !important;
 }
 
-.column:nth-child(2n) {
+/* This shit doesnt work and there is no way to fix it with css */
+/* div.visible:nth-of-type(even) {
   background-color: #583c5a30;
-}
+} */
 
-.column:hover:not(:nth-child(1)) {
+.visible:hover:not(:nth-child(1)) {
   background-color: rgba(88, 60, 90, 0.382);
 }
 
 .row {
   width: 100%;
+}
+
+/* here is an error, the text is underlined but not the container
+it is also a too big of a content inside the container 
+
+this also destroyes the purpose of organization having to invite others, not everyone else
+should have an if if this is a company */
+
+.visible {
+  display: flex;
 }

@@ -5,38 +5,56 @@
 
   $users = $read->getUsers();
   // This should be dynamic
-  $internships = $read->get_all_internships_from_company("Oslomet");
+  $internships = $read->get_company_internships($_SESSION['username']);
   $tags = $read->getAllPossibleTags();
 ?>
+
+<?php if ($_SESSION['role'] == 'organization') { ?>
+  <style>
+    .column:not(:nth-child(1)):hover .row:nth-child(1) {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+<?php } ?>
+
+
 
   <main>
     <section class="content-container">
       <h1>Members</h1>
       <p style="font-weight: bold;">Filter by member type:</p>
-      <div class="hashtag-options" onclick="showMembers(clicked = true)">
+      <div class="hashtag-options" onclick="filterMembers(clicked = true)">
         <?php foreach($tags as $tag): ?>
           <?php if ($tag['id'] < 13) continue ?>
           <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
             <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
             <?php echo $tag['name'] ?>
           </label>
-        <?php endforeach; ?>
+        <?php endforeach ?>
       </div>
       <button id="search-for-internships" style="opacity: 0;">Search for internships</button>
-      <p class="available-internships">
-        <!-- <span class="item-count"></span>
-        students: -->
-      </p>
       <section class="list-of-members">
-        
+        <div class="column visible">
+          <div class="row">Username</div>
+          <div class="row">Role</div>
+        </div>
+      <?php foreach($users as $user): ?>
+        <div class="column visible">
+          <div class="row" data-modal-target="#modal">
+            <?php echo $user['username'] ?>
+            <?php if ($_SESSION['role'] == 'organization') echo '&#10138;' ?>
+          </div>
+          <div class="row"><?php echo $user['role'] ?></div>
+        </div>
+      <?php endforeach ?>
       </section>
     </section>
     
     <?php include_once 'inc/feedback_message.php' ?>
-
-  
   </main>
 
+  <?php if ($_SESSION['role'] == 'organization') { ?>
   <div class="modal" id="modal">
     <div class="modal-header">
       <div class="title">Invite student</div>
@@ -50,124 +68,59 @@
         <select id="post_title" <?php if ($_SESSION['role'] == 'organization') {  echo 'onclick="doSome()"'; } ?>>
           <?php foreach($internships as $internship): ?> 
             <option value="<?php echo $internship['post_title'] ?>"><?php echo $internship['post_title'] ?></option>
-          <?php endforeach; ?>
+          <?php endforeach ?>
         </select>
         <button name="submit" type="submit">Invite</button>
       </form>
     </div>
   </div>
   <div id="overlay"></div>
+  <?php } ?>
 
-  
+
 
 
   <script>
+    <?php if ($_SESSION['role'] == 'organization') { ?>
     function doSome() {
       document.getElementById('post_title_input').value = document.getElementById('post_title').value
     }
     doSome()
+    <?php } ?>
 
-    const list_of_members = document.querySelector(".list-of-members")
-    const membersArrayJS = [
-      // first object sets the titles for each row 
-      {
-        username: "Username",
-        role: "Role"
-      },
-      <?php foreach($users as $user): 
-        echo '{
-          username: "' . $user['username'] . '",
-          role: "' . $user['role'] . '",
-        },';
-      endforeach ?>
-    ]
 
-    function buildTable(member) {
-      const div = document.createElement('div')
-      div.classList.add('column')
+    function filterMembers() {
+      let allMembers = document.querySelectorAll('.column')
+      let checkedBoxes = document.querySelectorAll('input:checked')
 
-      for (let i = 0; i < Object.keys(membersArrayJS[0]).length; i++) {
-        const row = document.createElement('div')
-        row.classList.add('row')
-        row.innerText = member[Object.keys(member)[i]]
-        if (row.innerText != 'Role' && row.innerText != 'Username') div.dataset.modalTarget = '#modal'
-        div.append(row)
-      }
-
-      list_of_members.append(div)
-    }
-    
-    function showMembers(clicked) {
-      list_of_members.innerText = ""
-
-      loop1: for (let i = 0; i < membersArrayJS.length; i++) {
-        let checkedBoxes = document.querySelectorAll('input:checked')
+      loop1: for (let i = 1; i < allMembers.length; i++) {
+        if (checkedBoxes.length == 0) allMembers[i].classList.remove("visible")
         
-        if (checkedBoxes.length == 0) {
-          document.querySelector(".available-internships").innerText = document.querySelectorAll(".column").length + " students:"
-          return buildTable(membersArrayJS[0])
-        }
-
         for (let j = 0; j < checkedBoxes.length; j++) {
-          if (checkedBoxes[j].name == membersArrayJS[i]['role'] || i == 0) {
-            buildTable(membersArrayJS[i])
+          let roleDiv = allMembers[i].querySelectorAll('.row')[1]
+          allMembers[i].classList.remove("visible")
+
+          if (checkedBoxes[j].name == roleDiv.innerText) {
+            allMembers[i].classList.add("visible")
             continue loop1
           }
         }
-      }      
-
-      if (clicked) {
-        openModalButtons = document.querySelectorAll('[data-modal-target]')
-        closeModalButtons = document.querySelectorAll('[data-close-button]')
-
-        openModalButtons.forEach(button => {
-          button.removeEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget)
-            openModal(modal)
-          })
-        })
-
-        overlay.removeEventListener('click', () => {
-          const modals = document.querySelectorAll('.modal.active')
-          modals.forEach(modal => {
-            closeModal(modal)
-          })
-        })
-
-        closeModalButtons.forEach(button => {
-          button.removeEventListener('click', () => {
-            const modal = button.closest('.modal')
-            closeModal(modal)
-          })
-        })
-
-        openModalButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget)
-            document.getElementById("user_username").value = button.firstChild.innerText
-            openModal(modal)
-          })
-        })
-
-        overlay.addEventListener('click', () => {
-          const modals = document.querySelectorAll('.modal.active')
-          modals.forEach(modal => {
-            closeModal(modal)
-          })
-        })
-
-        closeModalButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            const modal = button.closest('.modal')
-            closeModal(modal)
-          })
-        })
       }
 
-      // document.querySelector(".item-count").innerText = document.querySelectorAll(".column").length - 1
-      document.querySelector(".available-internships").innerText = document.querySelectorAll(".column").length - 1 + " members:"
+      let index = 0
+      for (let i = 1; i < allMembers.length; i++) {
+        if (!allMembers[i].classList.contains("visible")) {
+          continue
+        }
+        index++
+        allMembers[i].style.backgroundColor = "white"
+        if (index % 2 == 0) continue
+        allMembers[i].style.backgroundColor = "#583c5a30"
+        console.log(allMembers[i])
+      }
     }
-    showMembers()
+
+    filterMembers()
 
     <?php if ($_SESSION['role'] == 'organization') { ?>
     let openModalButtons = document.querySelectorAll('[data-modal-target]')
@@ -177,7 +130,8 @@
     openModalButtons.forEach(button => {
       button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
-        document.getElementById("user_username").value = button.firstChild.innerText
+        console.log(button.innerText.split(' ')[0])
+        document.getElementById("user_username").value = button.innerText.split(' ')[0]
         openModal(modal)
       })
     })

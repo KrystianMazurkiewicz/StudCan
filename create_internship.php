@@ -8,10 +8,10 @@
     <section class="content-container">
       <h1>Create an Internship</h1>
       <form method="post" action="success/success_create_internship.php">
-        <label>
+        <!-- <label>
           Company name
           <input required type="text" name="co_name" placeholder="Type in your company's name">
-        </label>
+        </label> -->
         <label>
           Title of the post
           <input required type="text" name="post_title" placeholder="Type in the title of this post">

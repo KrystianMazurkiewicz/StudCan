@@ -4,11 +4,11 @@
   require_once '../inc/session.php';
 
   if (isset($_POST['submit'])) {
-    $co_name = $_POST['co_name'];
+    // $co_name = $_POST['co_name'];
     $post_title = $_POST['post_title'];
     $post_description = $_POST['post_description'];
     $co_website = $_POST['co_website'];
-    $isSuccess = $create->insert($co_name, $post_title, $post_description, $co_website);
+    $isSuccess = $create->insert($_SESSION['username'], $post_title, $post_description, $co_website);
   }
 
   if ($isSuccess) {

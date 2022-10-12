@@ -108,9 +108,24 @@
       }
     }
 
+    public function get_company_internships($co_name) {
+      try {
+        $sql = "SELECT * FROM internships WHERE co_name = :co_name";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':co_name', $co_name);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
     public function get_post_ids_for_student($user_id) {
       try {
-        $sql = "SELECT internship_id FROM student_has_internship WHERE user_id = :user_id";
+        $sql = "SELECT internship_id FROM student_has_internship WHERE user_id = :user_id ORDER BY id DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':user_id', $user_id);
         $stmt->execute();
