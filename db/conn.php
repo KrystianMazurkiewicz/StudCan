@@ -1,8 +1,8 @@
 <?php 
   $dbhost = '127.0.0.1';
   $db = 'practicle_it_project';
-  $dbuser = 'krosh';
-  $dbpass = 'krosh';
+  $dbuser = 'root';
+  $dbpass = '';
   $dbcharset = 'utf8mb4';
 
   $dsn = "mysql:host=$dbhost;dbname=$db;charset=$dbcharset";

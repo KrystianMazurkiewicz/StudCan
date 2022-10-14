@@ -4,18 +4,20 @@
   require_once 'inc/header.php';
 
   $users = $read->getUsers();
-  // This should be dynamic
   $internships = $read->get_company_internships($_SESSION['username']);
-  $tags = $read->getAllPossibleTags();
+  // $tags = $read->getAllPossibleTags();
 ?>
 
 <?php if ($_SESSION['role'] == 'organization') { ?>
   <style>
-    .column:not(:nth-child(1)):hover .row:nth-child(1) {
+    /* .column:not(:nth-child(1)):hover .row:nth-child(1) {
       text-decoration: underline;
+    } */
+    .underline:hover {
       cursor: pointer;
+      text-decoration: underline;
     }
-  </style>
+    </style>
 <?php } ?>
 
 
@@ -24,14 +26,29 @@
     <section class="content-container">
       <h1>Members</h1>
       <p style="font-weight: bold;">Filter by member type:</p>
-      <div class="hashtag-options" onclick="filterMembers(clicked = true)">
-        <?php foreach($tags as $tag): ?>
-          <?php if ($tag['id'] < 13) continue ?>
-          <label for="<?php echo $tag['name'] ?>" class="hashtag-option">
-            <input type="checkbox" checked name="<?php echo $tag['name'] ?>" id="<?php echo $tag['name'] ?>">
-            <?php echo $tag['name'] ?>
+      <!-- <div class="hashtag-options" onclick="filterMembers(clicked = true)">
+        ?php foreach($tags as $tag): ?>
+          ?php if ($tag['id'] < 13) continue ?>
+          <label for="?php echo $tag['name'] ?>" class="hashtag-option">
+            <input type="checkbox" checked name="?php echo $tag['name'] ?>" id="?php echo $tag['name'] ?>">
+            ?php echo $tag['name'] ?>
           </label>
-        <?php endforeach ?>
+        ?php endforeach ?>
+      </div> -->
+
+      <div class="hashtag-options" onclick="filterMembers(clicked = true)">
+        <label for="admin" class="hashtag-option">
+          <input type="checkbox" checked="" name="admin" id="admin">
+          Admin
+        </label>
+        <label for="organization" class="hashtag-option">
+          <input type="checkbox" checked="" name="organization" id="organization">
+          Organization
+        </label>
+        <label for="student" class="hashtag-option">
+          <input type="checkbox" checked="" name="student" id="student">
+          Student
+        </label>
       </div>
       <button id="search-for-internships" style="opacity: 0;">Search for internships</button>
       <section class="list-of-members">
@@ -41,10 +58,11 @@
         </div>
       <?php foreach($users as $user): ?>
         <div class="column visible">
-          <div class="row" data-modal-target="#modal">
+          <div class="row <?php echo ($user['role'] == 'student') ? ' underline" data-modal-target="#modal"' : '"' ?>>
             <?php echo $user['username'] ?>
-            <?php if ($_SESSION['role'] == 'organization') echo '&#10138;' ?>
+            <?php if ($_SESSION['role'] == 'organization' && $user['role'] == 'student') echo '&#10138;' ?>
           </div>
+          <!-- HERE IS A BUG! DO NOT TOUCH THIS LINE. WHEN THIS IS ON DIFFERENT LINE THE INNERTEXT DOESNT TRIM THE WHITESPACE AND BREAKS -->
           <div class="row"><?php echo $user['role'] ?></div>
         </div>
       <?php endforeach ?>
@@ -70,7 +88,7 @@
             <option value="<?php echo $internship['post_title'] ?>"><?php echo $internship['post_title'] ?></option>
           <?php endforeach ?>
         </select>
-        <button name="submit" type="submit">Invite</button>
+        <button name="submit" type="submit">Invite student</button>
       </form>
     </div>
   </div>
@@ -99,7 +117,9 @@
         for (let j = 0; j < checkedBoxes.length; j++) {
           let roleDiv = allMembers[i].querySelectorAll('.row')[1]
           allMembers[i].classList.remove("visible")
-
+          
+          console.log(checkedBoxes[j].name)
+          console.log(roleDiv.innerText)
           if (checkedBoxes[j].name == roleDiv.innerText) {
             allMembers[i].classList.add("visible")
             continue loop1

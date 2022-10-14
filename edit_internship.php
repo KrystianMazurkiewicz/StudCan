@@ -25,17 +25,17 @@
       <h1>Edit Internship</h1>
       <form method="post" action="success/success_edit_internship.php">
         <input type="hidden" name="id" value="<?php echo $id ?>">
-        <label>
+        <!-- <label>
           Company name
-          <input type="text" name="co_name" placeholder="Type in your company's name" value="<?php echo $co_name ?>">
-        </label>
+          <input type="text" name="co_name" placeholder="Type in your company's name" value="?php echo $co_name ?>">
+        </label> -->
         <label>
           Title of the post
           <input type="text" name="post_title" placeholder="Type in the title of this post" value="<?php echo $post_title ?>">
         </label>
         <label>
           Description for the post
-          <textarea name="post_description" placeholder="Fill in description for the internship" cols="30" rows="10" value="<?php echo $post_description ?>"></textarea>
+          <textarea name="post_description" placeholder="Fill in description for the internship" cols="30" rows="10"><?php echo $post_description ?></textarea>
         </label>
         <label>
           Link to the company's website

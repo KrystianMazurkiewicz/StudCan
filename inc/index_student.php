@@ -71,9 +71,9 @@
                 </div>
                 <div class="people-applied">
                   <strong>
-                    <?php if($internship['ppl_applied'] > 10) echo 'Under 10 people' ?>
+                    <?php if($internship['ppl_applied'] < 10) echo 'Under 10 people' ?>
                     <?php if($internship['ppl_applied'] == 10) echo '10 people' ?>
-                    <?php if($internship['ppl_applied'] < 10) echo 'Over 10 people' ?>
+                    <?php if($internship['ppl_applied'] > 10) echo 'Over 10 people' ?>
                   </strong>
                   have applied
                 </div>
