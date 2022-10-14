@@ -70,9 +70,9 @@
                 </div>
                 <div class="people-applied">
                   <strong>
-                    <?php if ($internship['ppl_applied'] > 10) echo 'Under 10 people' ?>
+                    <?php if ($internship['ppl_applied'] < 10) echo 'Under 10 people' ?>
                     <?php if ($internship['ppl_applied'] == 10) echo '10 people' ?>
-                    <?php if ($internship['ppl_applied'] < 10) echo 'Over 10 people' ?>
+                    <?php if ($internship['ppl_applied'] > 10) echo 'Over 10 people' ?>
                   </strong>
                   have applied
                 </div>
@@ -109,18 +109,31 @@
 
 
                 <!-- SHOULD THIS BE HERE? SHOULD ADMIN HAVE THE POWER TO PUBLISH ARCHIVED POSTS? -> BECAUSE COMPANY IS UNABLE TO??? -->
-              <?php if ($internship['status'] == 'reviewed') { ?>
+              <!-- ?php if ($internship['status'] == 'reviewed') { ?>
               <div class="publish-decline-button-container">
-                <a href="success/success_publish_internship.php?id=<?php echo $internship['id'] ?>" class="publish-button button">
+                <a href="success/success_publish_internship.php?id=?php echo $internship['id'] ?>" class="publish-button button">
                   Publish
                 </a>
-                <a href="success/success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
+                <a href="success/success_decline_internship.php?id=?php echo $internship['id'] ?>" class="decline-button button">
                   Decline
                 </a>
               </div>
+              ?php } ?> -->
+
+
+              <?php if ($internship_status['status'] == 'invited') { ?>
+                <div class="publish-decline-button-container">
+                  <a 
+                    href="success/success_accept_student_to_internship.php?i-id=<?php echo $internship_id['internship_id'] ?>&s-id=<?php echo $_SESSION['user_id'] ?>"
+                    class="publish-button button"
+                  >
+                    Accept invitation
+                  </a>
+                  <a href="success/success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
+                    Decline invitation
+                  </a>
+                </div>
               <?php } ?>
-
-
 
 
 

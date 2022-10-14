@@ -105,7 +105,9 @@
 
     public function set_student_status_to_accepted_for_internship($user_id, $internship_id) {
       try { 
-        $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending'";
+        // THIS ONE DOESNT WORK FOR STUDENTS
+        // $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending'";
+        $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `user_id` = :user_id AND internship_id = :internship_id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':user_id', $user_id);
         $stmt->bindparam(':internship_id', $internship_id);

@@ -13,6 +13,5 @@
     
   } else if ($_SESSION['role'] == 'admin') {
     require_once 'inc/index_admin.php';
-    
   }
 ?>

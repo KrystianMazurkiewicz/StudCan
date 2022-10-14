@@ -70,7 +70,8 @@
                 </div>
                 <div class="people-applied">
                   <strong>
-                    <?php echo $internship['ppl_applied'] ?>
+                    <!-- ?php echo $internship['ppl_applied'] ?> -->
+                    <?php echo count($read->get_student_that_is_interested_in_internship($internship['id'])) ?>
                   </strong>
                   have applied
                 </div>
