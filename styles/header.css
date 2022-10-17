@@ -288,6 +288,14 @@ nav.menu-container {
   width: 100%;
 }
 
+.row::first-letter {
+  text-transform: capitalize;
+}
+
+.row > *::first-letter {
+  text-transform: capitalize;
+}
+
 .success-message-container {
   position: absolute;
   top: 2%;

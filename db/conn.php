@@ -23,5 +23,8 @@
   $read   = new read($pdo);
   $update = new update($pdo);
   $delete = new delete($pdo);
+  
+  require_once 'recreate_database.php';
+  $recreate_database = new recreate_database($pdo);
 
 ?>

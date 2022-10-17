@@ -22,11 +22,11 @@
       }
     }
 
-    public function get_username_by_id($id) {
+    public function get_username_by_id($username) {
       try {
-        $sql = "SELECT username FROM users WHERE id = :id";
+        $sql = "SELECT username FROM users WHERE username = :username";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':id', $id);
+        $stmt->bindparam(':username', $username);
         $stmt->execute();
         $result = $stmt->fetch();
         return $result;
@@ -54,7 +54,7 @@
 
     public function get_student_that_is_interested_in_internship($id) {
       try {
-        $sql = "SELECT user_id, status FROM student_has_internship WHERE internship_id = :id";
+        $sql = "SELECT username, status FROM student_has_internship WHERE internship_id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':id', $id);
         $stmt->execute();
@@ -79,11 +79,11 @@
       }
     }
     
-    public function get_info_about_profile($id) {
+    public function get_info_about_profile($username) {
       try {
-        $sql = "SELECT * FROM about_me WHERE user_id = :id";
+        $sql = "SELECT * FROM about_me WHERE username = :username";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':id', $id);
+        $stmt->bindparam(':username', $username);
         $stmt->execute();
         $result = $stmt->fetch();
         return $result;
@@ -123,11 +123,11 @@
       }
     }
 
-    public function get_post_ids_for_student($user_id) {
+    public function get_post_ids_for_student($username) {
       try {
-        $sql = "SELECT internship_id FROM student_has_internship WHERE user_id = :user_id ORDER BY id DESC";
+        $sql = "SELECT internship_id FROM student_has_internship WHERE username = :username ORDER BY id DESC";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
@@ -199,11 +199,11 @@
     }
 
 
-    public function get_internship_status_to_user($user_id, $internship_id) {
+    public function get_internship_status_to_user($username, $internship_id) {
       try {
-        $sql = "SELECT status FROM student_has_internship WHERE user_id = :user_id AND internship_id = :internship_id";
+        $sql = "SELECT status FROM student_has_internship WHERE username = :username AND internship_id = :internship_id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->bindparam(':internship_id', $internship_id);
         $stmt->execute();
         $result = $stmt->fetch();

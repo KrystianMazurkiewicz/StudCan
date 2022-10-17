@@ -84,16 +84,16 @@
       }
     }
 
-    public function edit_profile($short_about_me, $github_lenke, $mail_lenke, $linkedin_lenke, $about_me, $id) {
+    public function edit_profile($short_about_me, $github_lenke, $mail_lenke, $linkedin_lenke, $about_me, $username) {
       try { 
-        $sql = "UPDATE `about_me` SET `short_about_me`=:short_about_me, `github_lenke`=:github_lenke, `mail_lenke`=:mail_lenke, `linkedin_lenke`=:linkedin_lenke, `about_me`=:about_me WHERE `about_me`.`user_id` = :id";
+        $sql = "UPDATE `about_me` SET `short_about_me`=:short_about_me, `github_lenke`=:github_lenke, `mail_lenke`=:mail_lenke, `linkedin_lenke`=:linkedin_lenke, `about_me`=:about_me WHERE `about_me`.`username` = :username";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':short_about_me', $short_about_me);
         $stmt->bindparam(':github_lenke', $github_lenke);
         $stmt->bindparam(':mail_lenke', $mail_lenke);
         $stmt->bindparam(':linkedin_lenke', $linkedin_lenke);
         $stmt->bindparam(':about_me', $about_me);
-        $stmt->bindparam(':id', $id);
+        $stmt->bindparam(':username', $username);
         $stmt->execute();
         return true;
 
@@ -103,13 +103,13 @@
       }  
     }
 
-    public function set_student_status_to_accepted_for_internship($user_id, $internship_id) {
+    public function set_student_status_to_accepted_for_internship($username, $internship_id) {
       try { 
         // THIS ONE DOESNT WORK FOR STUDENTS
-        // $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending'";
-        $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `user_id` = :user_id AND internship_id = :internship_id";
+        // $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `username` = :username AND internship_id = :internship_id AND `status` = 'pending'";
+        $sql = "UPDATE `student_has_internship` SET `status`= 'accepted' WHERE `username` = :username AND internship_id = :internship_id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->bindparam(':internship_id', $internship_id);
         $stmt->execute();
         return true;
@@ -120,12 +120,12 @@
       }  
     }
 
-    public function set_student_status_to_denied_for_internship($user_id, $internship_id) {
+    public function set_student_status_to_denied_for_internship($username, $internship_id) {
       try { 
         // SQL BELOW MIGHT GIVE ERROR BECAUSE OF 'OR' AT THE END!
-        $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `user_id` = :user_id AND internship_id = :internship_id AND `status` = 'pending' OR `status` = 'accepted'";
+        $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `username` = :username AND internship_id = :internship_id AND `status` = 'pending' OR `status` = 'accepted'";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->bindparam(':internship_id', $internship_id);
         $stmt->execute();
         return true;

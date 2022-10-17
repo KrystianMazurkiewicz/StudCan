@@ -138,3 +138,9 @@ should have an if if this is a company */
 .modal-header .close-button:hover {
   background-color: rgb(212, 178, 178);
 }
+
+.view-profile {
+  font-size: .8rem;
+  margin-left: 10px;
+  text-decoration: underline;
+}

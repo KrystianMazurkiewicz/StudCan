@@ -75,7 +75,26 @@
               </div>
               <div class="post-status">
                 Status:
-                <b>Published To Students</b>
+                <?php if ($internship['status'] == 'published') { ?>
+                <b style="color: green;">
+                  Published to students
+                </b>
+                <?php } ?>
+                <?php if ($internship['status'] == 'declined') { ?>
+                <b style="color: red;">
+                  Declined by admin
+                </b>
+                <?php } ?>
+                <?php if ($internship['status'] == 'reviewed') { ?>
+                <b>
+                  Being reviewed
+                </b>
+                <?php } ?>
+                <?php if ($internship['status'] == 'archived') { ?>
+                <b>
+                  Archived
+                </b>
+                <?php } ?>
               </div>
             </div>
           </div>

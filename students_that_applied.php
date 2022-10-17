@@ -104,21 +104,21 @@
               <?php foreach ($students as $student) : ?>
                 <div class="column">
                   <div class="row">
-                    <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
-                      <?php echo $read->get_username_by_id($student['user_id'])[0] ?>
+                    <a href="view_profile.php?username=<?php echo $student['username'] ?>">
+                      <?php echo $student['username'] ?>
                     </a>
                   </div>
                   <div class="row">
                     <?php echo $student['status'] ?>
                     <div class="buttons-container">
                       <a 
-                        href="success/success_accept_student_to_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['user_id'] ?>" 
+                        href="success/success_accept_student_to_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['username'] ?>" 
                         class="accept-student button"
                       >
                         Accept student
                       </a>
                       <a 
-                        href="success/success_remove_student_from_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['user_id'] ?>" 
+                        href="success/success_remove_student_from_internship.php?i-id=<?php echo $internships['id'] ?>&s-id=<?php echo $student['username'] ?>" 
                         class="remove-student button"
                       >
                         Remove student

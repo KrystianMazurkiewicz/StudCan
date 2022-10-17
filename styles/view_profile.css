@@ -53,7 +53,7 @@ main * {
   width: fit-content;
 }
 
-.short-info-about-user > a:last-child {
+.short-info-about-user > a.edit-button {
   margin-top: 3%;
 }
 

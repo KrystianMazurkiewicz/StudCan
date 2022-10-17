@@ -5,7 +5,7 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $result = $read->get_info_about_profile($_SESSION['user_id']);
+  $result = $read->get_info_about_profile($_SESSION['username']);
 ?>
 
   <main>

@@ -3,7 +3,7 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  $internship_ids = $read->get_post_ids_for_student($_SESSION['user_id']); // 1, 2
+  $internship_ids = $read->get_post_ids_for_student($_SESSION['username']); // 1, 2
 ?>
 
   <main>
@@ -39,7 +39,7 @@
       <?php foreach($internship_ids as $internship_id): ?>
         <?php
           $internship = $read->get_internship_by_id($internship_id['internship_id']);
-          $internship_status = $read->get_internship_status_to_user($_SESSION['user_id'], $internship['id']);
+          $internship_status = $read->get_internship_status_to_user($_SESSION['username'], $internship['id']);
         ?>
         
         <!-- ?php if($internship['status'] == 'published') continue ?> -->
@@ -108,17 +108,13 @@
               </style>
 
 
-                <!-- SHOULD THIS BE HERE? SHOULD ADMIN HAVE THE POWER TO PUBLISH ARCHIVED POSTS? -> BECAUSE COMPANY IS UNABLE TO??? -->
-              <!-- ?php if ($internship['status'] == 'reviewed') { ?>
+              <?php if ($internship['status'] == 'published') { ?>
               <div class="publish-decline-button-container">
-                <a href="success/success_publish_internship.php?id=?php echo $internship['id'] ?>" class="publish-button button">
-                  Publish
-                </a>
-                <a href="success/success_decline_internship.php?id=?php echo $internship['id'] ?>" class="decline-button button">
-                  Decline
+                <a href="success/success_unsend_application.php?internship_id=<?php echo $internship['id'] ?>&username=<?php echo $_SESSION['username'] ?>" class="publish-button button">
+                  Unsend application
                 </a>
               </div>
-              ?php } ?> -->
+              <?php } ?>
 
 
               <?php if ($internship_status['status'] == 'invited') { ?>

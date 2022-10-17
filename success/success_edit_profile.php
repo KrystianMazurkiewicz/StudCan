@@ -6,13 +6,13 @@
 
   
   if (isset($_POST['submit'])) {
-    $id = $_SESSION['user_id'];
+    $username = $_POST['username'];
     $github_lenke = $_POST['github_lenke'];
     $mail_lenke = $_POST['mail_lenke'];
     $linkedin_lenke = $_POST['linkedin_lenke'];
     $short_about_me = $_POST['short_about_me'];
     $about_me = $_POST['about_me'];
-    $isSuccess = $update->edit_profile($short_about_me, $github_lenke, $mail_lenke, $linkedin_lenke, $about_me, $id);
+    $isSuccess = $update->edit_profile($short_about_me, $github_lenke, $mail_lenke, $linkedin_lenke, $about_me, $username);
   }
 
   if ($isSuccess) {

@@ -63,11 +63,11 @@
       }
     }
 
-    public function insert_applied_internship($user_id, $post_id) {
+    public function insert_applied_internship($username, $post_id) {
       try {
-        $sql = "INSERT INTO student_has_internship(user_id, internship_id) VALUES (:user_id, :post_id);";
+        $sql = "INSERT INTO student_has_internship(username, internship_id) VALUES (:username, :post_id);";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->bindparam(':post_id', $post_id);
         $stmt->execute();
         return true;

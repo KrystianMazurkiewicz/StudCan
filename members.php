@@ -42,7 +42,8 @@
           Admin
         </label>
         <label for="organization" class="hashtag-option">
-          <input type="checkbox" checked="" name="organization" id="organization">
+       
+        <input type="checkbox" checked="" name="organization" id="organization">
           Organization
         </label>
         <label for="student" class="hashtag-option">
@@ -55,15 +56,22 @@
         <div class="column visible">
           <div class="row">Username</div>
           <div class="row">Role</div>
+          <?php if ($_SESSION['role'] == 'admin') { ?>
+          <div class="row">Status</div>
+          <?php } ?>
         </div>
       <?php foreach($users as $user): ?>
         <div class="column visible">
           <div class="row <?php echo ($user['role'] == 'student') ? ' underline" data-modal-target="#modal"' : '"' ?>>
             <?php echo $user['username'] ?>
             <?php if ($_SESSION['role'] == 'organization' && $user['role'] == 'student') echo '&#10138;' ?>
+            <span><a class="view-profile" href="view_profile.php?username=<?php echo $user['username'] ?>">Show profile</a></span>
           </div>
           <!-- HERE IS A BUG! DO NOT TOUCH THIS LINE. WHEN THIS IS ON DIFFERENT LINE THE INNERTEXT DOESNT TRIM THE WHITESPACE AND BREAKS -->
           <div class="row"><?php echo $user['role'] ?></div>
+          <?php if ($_SESSION['role'] == 'admin') { ?>
+          <div class="row"><?php echo $user['username'] ?></div>
+          <?php } ?>
         </div>
       <?php endforeach ?>
       </section>

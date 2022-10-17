@@ -3,10 +3,10 @@
   require_once 'db/conn.php';
   require_once 'inc/header.php';
 
-  if (isset($_GET['user_id'])) {
-    $result = $read->get_info_about_profile($_GET['user_id']);
+  if (isset($_GET['username'])) {
+    $result = $read->get_info_about_profile($_GET['username']);
   } else {
-    $result = $read->get_info_about_profile($_SESSION['user_id']);
+    $result = $read->get_info_about_profile($_SESSION['username']);
   }
 
   $internships = $read->getAllInternships();
@@ -25,7 +25,7 @@
           <img src="images/white-purple-profile-icon.png" alt="">
         </div>
         <div class="short-info-about-user">
-          <h1><?php echo $_SESSION['username'] ?>'s profile</h1>
+          <h1><?php echo $result['username'] ?>'s profile</h1>
           <p class="short-about-me">
             <?php echo $result['short_about_me'] ?>
           </p>
@@ -41,9 +41,11 @@
             <b>LinkedIn.com:</b>
             <?php echo $result['linkedin_lenke'] ?>
           </a>
+          <?php if (!isset($_GET['username'])) { ?>
           <a href="edit_profile.php" class="edit-button">
             Edit
           </a>
+          <?php } ?>
         </div>
       </section>
       <section class="about-me-section">
@@ -99,8 +101,8 @@
             <!-- ?php echo $student['user_id'] ?> -->
             <div class="column">
               <div class="row">
-                <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
-                  <?php echo $read->get_username_by_id($student['user_id'])[0] ?>
+                <a href="view_profile.php?username=<?php echo $student['username'] ?>">
+                  <!-- ?php echo $read->get_username_by_id($student['username'])[0] ?> -->
                 </a>
               </div>
               <div class="row">

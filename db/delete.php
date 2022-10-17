@@ -35,6 +35,21 @@
         return false;
       }  
     }
+
+    public function delete_application($username, $internship_id) {
+      try { 
+        $sql = "DELETE FROM `student_has_internship` WHERE `username` = :username AND internship_id = :internship_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':username', $username);
+        $stmt->bindparam(':internship_id', $internship_id);
+        $stmt->execute();
+        return true;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }  
+    }
     
 
     

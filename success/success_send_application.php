@@ -5,7 +5,7 @@
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
     if ($read->get_internship($id)) {
-      $isSuccess = $create->insert_applied_internship($_SESSION['user_id'], $id);
+      $isSuccess = $create->insert_applied_internship($_SESSION['username'], $id);
     } else {
       $isSuccess = false;
     }
