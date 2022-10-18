@@ -247,6 +247,8 @@
       }
     }
 
+
+    // wtf is this doing here?
     public function get_applied_internship($id) {
       try {
         $sql = "SELECT internship_id FROM student_has_internship WHERE user_id = :id";
@@ -254,6 +256,30 @@
         $stmt->bindparam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
+        return $result;
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
+    // doesnt work
+    public function get_highest_priority_status_for_student($username) {
+      try {
+        $sql = "SELECT status ORDER BY CASE 
+        WHEN status = 'accepted' THEN 'Has internship' 
+        WHEN status = 'invited' THEN 'Is invited'
+        WHEN status = 'applied' THEN 'Has applied'
+        WHEN status = 'denied' THEN 'Has no option'
+        WHEN status = 'cancelled' THEN 'Has no option'
+        ELSE 'Has not applied yet'
+        END
+        FROM student_has_internship WHERE username = :username";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':username', $username);
+        $stmt->execute();
+        $result = $stmt->fetch();
         return $result;
 
       } catch (PDOException $e) {

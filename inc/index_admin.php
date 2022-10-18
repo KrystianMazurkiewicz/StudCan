@@ -115,11 +115,11 @@
               </h3>
               <?php if (!$students) echo 'No one applied to this internship yet.'; ?>
               <?php foreach ($students as $student) : ?>
-                <!-- ?php echo $student['user_id'] ?> -->
+                <!-- ?php echo $student['username'] ?> -->
                 <div class="column">
                   <div class="row">
-                    <a href="view_profile.php?user_id=<?php echo $student['user_id'] ?>">
-                      <?php echo $read->get_username_by_id($student['user_id'])[0] ?>
+                    <a href="view_profile.php?username=<?php echo $student['username'] ?>">
+                      <?php echo $read->get_username_by_id($student['username'])[0] ?>
                     </a>
                   </div>
                   <div class="row">

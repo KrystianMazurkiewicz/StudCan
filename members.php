@@ -70,7 +70,7 @@
           <!-- HERE IS A BUG! DO NOT TOUCH THIS LINE. WHEN THIS IS ON DIFFERENT LINE THE INNERTEXT DOESNT TRIM THE WHITESPACE AND BREAKS -->
           <div class="row"><?php echo $user['role'] ?></div>
           <?php if ($_SESSION['role'] == 'admin') { ?>
-          <div class="row"><?php echo $user['username'] ?></div>
+          <div class="row"><?php echo 'doesnt work yet :)' ?></div>
           <?php } ?>
           <?php if ($_SESSION['role'] == 'organization' && $user['role'] == 'student') { ?>
           <button class="invite-student" data-username="<?php echo $user['username'] ?>" data-modal-target="#modal">
