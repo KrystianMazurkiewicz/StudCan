@@ -66,6 +66,7 @@ h1 {
   width: 100%;
   padding: 10px;
   display: none;
+  position: relative;
   justify-content: space-evenly;
 }
 
@@ -98,6 +99,8 @@ should have an if if this is a company */
 
 .visible {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #modal {
@@ -143,4 +146,18 @@ should have an if if this is a company */
   font-size: .8rem;
   margin-left: 10px;
   text-decoration: underline;
+}
+
+.invite-student {
+  border: 1px solid rgb(134, 134, 134);
+  font-weight: 700;
+  padding: 4px 10px;
+  cursor: pointer;
+  background-color: #dfdce0;
+  position: absolute;
+  right: .5rem;
+}
+
+.invite-student:hover {
+  background-color: #d5c4d9;
 }

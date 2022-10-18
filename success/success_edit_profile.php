@@ -6,7 +6,7 @@
 
   
   if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
+    $username = $_SESSION['username'];
     $github_lenke = $_POST['github_lenke'];
     $mail_lenke = $_POST['mail_lenke'];
     $linkedin_lenke = $_POST['linkedin_lenke'];

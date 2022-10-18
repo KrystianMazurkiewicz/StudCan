@@ -110,7 +110,8 @@ h2.title-for-job-description {
 
 .send-application {
   display: block;
-  opacity: 0;
+  /* opacity: 0; */
+  opacity: 1;
   width: 50px;
   margin-right: 30px;
   cursor: pointer;
@@ -125,11 +126,14 @@ h2.title-for-job-description {
   background-size: 50px 50px;
 }
 
+.send-application:hover {
+  outline: 5px #583C5A solid;
+}
+
 .firma-container:hover .send-application {
   opacity: 1;
 }
 
 .send-application:focus {
   opacity: 1;
-  outline: 5px #583C5A solid;
 }

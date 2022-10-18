@@ -1,4 +1,4 @@
-main {
+/* main {
   display: flex;
   overflow-y: scroll;
   justify-content: center;
@@ -40,13 +40,13 @@ h1 {
   margin-right: 4px;
 }
 
-/* #sort-skills {
+#sort-skills {
   font-weight: 500;
   margin: 10px 0 50px;
   padding: 10px;
   border: 1px solid #583C5A;
   cursor: pointer;
-} */
+} 
 
 .your-internships {
   font-size: 1.75rem;
@@ -59,4 +59,60 @@ h1 {
   flex-direction: column;
   width: 100%;
   border: #583C5A solid 1px;
+} */
+
+.publish-decline-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.button:hover {
+  color: lightgrey;                  
+}
+
+.publish-button {
+  background-color: green;                  
+}
+
+.decline-button {
+  background-color: #583C5A;
+}
+
+.overlay-status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.color {
+  background-color: rgba(230, 230, 230, 0.677);
+  font-weight: 500;
+  text-shadow: 0px 11px 10px grey;
+  text-transform: capitalize;
+}
+
+.firma:hover .overlay-status {
+  display: none;
+}
+
+.firma-container {
+  display: none;
+}
+
+.visible {
+  display: flex;
 }

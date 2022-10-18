@@ -123,7 +123,8 @@
     public function set_student_status_to_denied_for_internship($username, $internship_id) {
       try { 
         // SQL BELOW MIGHT GIVE ERROR BECAUSE OF 'OR' AT THE END!
-        $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `username` = :username AND internship_id = :internship_id AND `status` = 'pending' OR `status` = 'accepted'";
+        // $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `username` = :username AND internship_id = :internship_id AND `status` = 'pending' OR `status` = 'accepted'";
+        $sql = "UPDATE `student_has_internship` SET `status`= 'denied' WHERE `username` = :username AND internship_id = :internship_id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindparam(':username', $username);
         $stmt->bindparam(':internship_id', $internship_id);

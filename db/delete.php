@@ -21,11 +21,11 @@
       }
     }
 
-    public function remove_student_from_internship($user_id, $internship_id) {
+    public function remove_student_from_internship($username, $internship_id) {
       try { 
-        $sql = "DELETE FROM `student_has_internship` WHERE `user_id` = :user_id AND internship_id = :internship_id";
+        $sql = "DELETE FROM `student_has_internship` WHERE `username` = :username AND internship_id = :internship_id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->bindparam(':internship_id', $internship_id);
         $stmt->execute();
         return true;

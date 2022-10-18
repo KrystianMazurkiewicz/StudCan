@@ -47,11 +47,11 @@
       }
     }
 
-    public function insert_invitation_from_company($user_id, $internship_id, $status) {
+    public function insert_invitation_from_company($username, $internship_id, $status) {
       try {
-        $sql = "INSERT INTO student_has_internship(user_id, internship_id, status) VALUES (:user_id, :internship_id, :status);";
+        $sql = "INSERT INTO student_has_internship(username, internship_id, status) VALUES (:username, :internship_id, :status);";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindparam(':user_id', $user_id);
+        $stmt->bindparam(':username', $username);
         $stmt->bindparam(':internship_id', $internship_id);
         $stmt->bindparam(':status', $status);
         $stmt->execute();

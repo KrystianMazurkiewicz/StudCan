@@ -17,6 +17,7 @@
   }
   else if ($title == 'status_student') {
     echo '<link rel="stylesheet" href="styles/index.css">';
+    echo '<link rel="stylesheet" href="styles/status_student.css">';
   }
   else if ($title == 'view_profile') {
     echo '<link rel="stylesheet" href="styles/view_profile.css">';

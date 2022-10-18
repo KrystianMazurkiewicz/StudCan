@@ -10,18 +10,22 @@
     <section class="content-container">
       <h1>Your internships</h1>
       <p style="font-weight: bold;">Filter by status:</p>
-      <div class="hashtag-options" onclick="showMembers()">
-        <label for="interested" class="hashtag-option">
-          <input type="checkbox" checked name="interested" id="interested">
-          Interested
-        </label>
-        <label for="pending" class="hashtag-option">
-          <input type="checkbox" checked name="pending" id="pending">
-          Pending
+      <div class="hashtag-options" onclick="filterMembers()">
+        <label for="accepted" class="hashtag-option">
+          <input type="checkbox" checked name="accepted" id="accepted">
+          Accepted
         </label>
         <label for="denied" class="hashtag-option">
           <input type="checkbox" checked name="denied" id="denied">
           Denied
+        </label>
+        <label for="applied" class="hashtag-option">
+          <input type="checkbox" checked name="applied" id="applied">
+          Applied
+        </label>
+        <label for="invited" class="hashtag-option">
+          <input type="checkbox" checked name="invited" id="invited">
+          Invited
         </label>
         <label for="cancelled" class="hashtag-option">
           <input type="checkbox" checked name="cancelled" id="cancelled">
@@ -33,7 +37,7 @@
       <p class="available-internships">
         You showed interest in
         <?php echo count($internship_ids) ?>
-        internships:
+        internships
       </p>
       <section class="list-of-your-internships">
       <?php foreach($internship_ids as $internship_id): ?>
@@ -43,7 +47,7 @@
         ?>
         
         <!-- ?php if($internship['status'] == 'published') continue ?> -->
-        <article class="firma-container">
+        <article class="firma-container" data-status="<?php echo $internship_status['status'] ?>">
           <div class="firma" style="position: relative;">
             <h2 class="title-for-job-description">
               <?php echo $internship['post_title'] ?>
@@ -79,36 +83,8 @@
               </div>
 
 
-              <style>
-                .publish-decline-button-container {
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-evenly;
-                  padding-bottom: 20px;
-                }
 
-                .button {
-                  padding: 10px 20px;
-                  border-radius: 10px;
-                  color: white;
-                }
-
-                .button:hover {
-                  color: lightgrey;                  
-                }
-
-                .publish-button {
-                  background-color: green;                  
-                }
-                
-                .decline-button {
-                  background-color: #583C5A;
-                }
-                
-              </style>
-
-
-              <?php if ($internship['status'] == 'published') { ?>
+              <?php if ($internship['status'] == 'published' && $internship_status['status'] == 'applied') { ?>
               <div class="publish-decline-button-container">
                 <a href="success/success_unsend_application.php?internship_id=<?php echo $internship['id'] ?>&username=<?php echo $_SESSION['username'] ?>" class="publish-button button">
                   Unsend application
@@ -120,12 +96,15 @@
               <?php if ($internship_status['status'] == 'invited') { ?>
                 <div class="publish-decline-button-container">
                   <a 
-                    href="success/success_accept_student_to_internship.php?i-id=<?php echo $internship_id['internship_id'] ?>&s-id=<?php echo $_SESSION['user_id'] ?>"
+                    href="success/success_accept_student_to_internship.php?i-id=<?php echo $internship_id['internship_id'] ?>&s-id=<?php echo $_SESSION['username'] ?>"
                     class="publish-button button"
                   >
                     Accept invitation
+                    <!-- ?php echo $internship_id['internship_id'] ?>
+                    ?php echo $internship['id'] ?>
+                    jeg er dum -->
                   </a>
-                  <a href="success/success_decline_internship.php?id=<?php echo $internship['id'] ?>" class="decline-button button">
+                  <a href="success/success_remove_student_from_internship.php?i-id=<?php echo $internship_id['internship_id'] ?>&s-id=<?php echo $_SESSION['username'] ?>" class="decline-button button">
                     Decline invitation
                   </a>
                 </div>
@@ -136,32 +115,6 @@
 
             </div>
 
-          <style>
-            .overlay-status {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 4rem;
-            }
-
-            .color {
-              background-color: rgba(230, 230, 230, 0.677);
-              font-weight: 500;
-              text-shadow: 0px 11px 10px grey;
-              text-transform: capitalize;
-            }
-          </style>
-
-          <style>
-            .firma:hover .overlay-status {
-              display: none;
-            }
-          </style>
 
           <div class="overlay-status">
             <div class="overlay-status color">
@@ -181,8 +134,31 @@
     </section>
     
     <?php include_once 'inc/feedback_message.php' ?>
-
   </main>
+
+
+
+  <script>
+    function filterMembers() {
+      let allPosts = document.querySelectorAll('[data-status]')
+      let checkedBoxes = document.querySelectorAll('input:checked')
+
+      loop1: for (let i = 0; i < allPosts.length; i++) {
+        if (checkedBoxes.length == 0) allPosts[i].classList.remove("visible")
+        
+        for (let j = 0; j < checkedBoxes.length; j++) {  
+          allPosts[i].classList.remove("visible")
+        
+          if (checkedBoxes[j].name == allPosts[i].dataset.status) {
+            allPosts[i].classList.add("visible")
+            continue loop1
+          }
+        }
+      }
+    }
+
+    filterMembers()
+  </script>
 
   <!-- <footer>
     Copyright 2022

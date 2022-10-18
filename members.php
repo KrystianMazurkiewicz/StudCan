@@ -8,7 +8,7 @@
   // $tags = $read->getAllPossibleTags();
 ?>
 
-<?php if ($_SESSION['role'] == 'organization') { ?>
+<!-- ?php if ($_SESSION['role'] == 'organization') { ?> -->
   <style>
     /* .column:not(:nth-child(1)):hover .row:nth-child(1) {
       text-decoration: underline;
@@ -18,7 +18,7 @@
       text-decoration: underline;
     }
     </style>
-<?php } ?>
+<!-- ?php } ?> -->
 
 
 
@@ -62,15 +62,20 @@
         </div>
       <?php foreach($users as $user): ?>
         <div class="column visible">
-          <div class="row <?php echo ($user['role'] == 'student') ? ' underline" data-modal-target="#modal"' : '"' ?>>
-            <?php echo $user['username'] ?>
-            <?php if ($_SESSION['role'] == 'organization' && $user['role'] == 'student') echo '&#10138;' ?>
-            <span><a class="view-profile" href="view_profile.php?username=<?php echo $user['username'] ?>">Show profile</a></span>
+          <div class="row">
+            <a class="underline" href="view_profile.php?username=<?php echo $user['username'] ?>">
+              <?php echo $user['username'] ?> &#10138;
+            </a>
           </div>
           <!-- HERE IS A BUG! DO NOT TOUCH THIS LINE. WHEN THIS IS ON DIFFERENT LINE THE INNERTEXT DOESNT TRIM THE WHITESPACE AND BREAKS -->
           <div class="row"><?php echo $user['role'] ?></div>
           <?php if ($_SESSION['role'] == 'admin') { ?>
           <div class="row"><?php echo $user['username'] ?></div>
+          <?php } ?>
+          <?php if ($_SESSION['role'] == 'organization' && $user['role'] == 'student') { ?>
+          <button class="invite-student" data-username="<?php echo $user['username'] ?>" data-modal-target="#modal">
+            Invite student
+          </button>
           <?php } ?>
         </div>
       <?php endforeach ?>
@@ -92,7 +97,8 @@
         <input type="hidden" id="post_title_input" name="post_title">
         Choose project you want the student to get invited to:
         <select id="post_title" <?php if ($_SESSION['role'] == 'organization') {  echo 'onclick="doSome()"'; } ?>>
-          <?php foreach($internships as $internship): ?> 
+          <?php foreach($internships as $internship): ?>
+            <?php if ($internship['status'] != 'published') continue ?>
             <option value="<?php echo $internship['post_title'] ?>"><?php echo $internship['post_title'] ?></option>
           <?php endforeach ?>
         </select>
@@ -158,8 +164,8 @@
     openModalButtons.forEach(button => {
       button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
-        console.log(button.innerText.split(' ')[0])
-        document.getElementById("user_username").value = button.innerText.split(' ')[0]
+        // document.getElementById("user_username").value = button.innerText.split(' ')[0]
+        document.getElementById("user_username").value = button.dataset.username
         openModal(modal)
       })
     })
