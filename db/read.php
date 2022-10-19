@@ -247,6 +247,21 @@
       }
     }
 
+    public function get_user_role_by_username($username) {
+      try {
+        $sql = "SELECT role FROM users WHERE username = :username";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam(':username', $username);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+        
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+      }
+    }
+
 
     // wtf is this doing here?
     public function get_applied_internship($id) {
@@ -287,6 +302,8 @@
         return false;
       }
     }
+
+
 
     
 

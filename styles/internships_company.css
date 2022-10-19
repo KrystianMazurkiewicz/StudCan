@@ -145,3 +145,22 @@ h2.title-for-job-description {
 }
 
 
+.people-applied:hover {
+  text-decoration: underline;
+}
+
+.people-applied > span:nth-child(1) {
+  color: rgb(159, 159, 159);  
+}
+
+.people-applied:hover > span:nth-child(1) {
+  color: inherit;
+}
+
+.people-applied > span.that-text {
+  display: none;
+}
+
+.people-applied:hover > span.that-text {
+  display: inline;
+}

@@ -16,9 +16,9 @@
     </p>
 
     <style>
-      .firma-container:hover .people-applied {
+      /* .firma-container:hover .people-applied {
         text-decoration: underline !important;
-      }
+      } */
 
       .archived {
         opacity: .5;
@@ -58,10 +58,16 @@
                   </strong>
                 </div>
                 <a class="people-applied" href="students_that_applied.php?id=<?php echo $internship['id'] ?>">
+                  <span>
+                    &#10138; View these 
+                  </span>
                   <b>
                     <?php echo count($read->get_student_that_is_interested_in_internship($internship['id'])) ?>
                     people
                   </b>
+                  <span class="that-text">
+                    that
+                  </span>
                   have applied
                 </a>
               </div>

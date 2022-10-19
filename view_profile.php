@@ -46,6 +46,17 @@
             Edit
           </a>
           <?php } ?>
+          <?php
+            if (isset($_GET['username'])) {
+              $this_users_role = $read->get_user_role_by_username($_GET['username']);
+            }
+
+            if (isset($_GET['username']) && $this_users_role['role'] == 'student') { 
+          ?>
+          <a class="edit-button" data-username="<?php echo $_GET['username'] ?>" data-modal-target="#modal">
+            Invite student
+          </a>
+          <?php } ?>
         </div>
       </section>
       <section class="about-me-section">
@@ -125,7 +136,75 @@
     
     <?php include_once 'inc/feedback_message.php' ?>
   
+    <?php if ($_SESSION['role'] == 'organization') { ?>
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">Invite student</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="success/success_invite_student_to_project.php">
+          <input type="hidden" id="user_username" name="user_username">
+          <input type="hidden" id="post_title_input" name="post_title">
+          Choose project you want the student to get invited to:
+          <select id="post_title" <?php if ($_SESSION['role'] == 'organization') {  echo 'onclick="doSome()"'; } ?>>
+            <?php foreach($internships as $internship): ?>
+              <?php if ($internship['status'] != 'published') continue ?>
+              <option value="<?php echo $internship['post_title'] ?>"><?php echo $internship['post_title'] ?></option>
+            <?php endforeach ?>
+          </select>
+          <button name="submit" type="submit">Invite student</button>
+        </form>
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <?php } ?>
+    
   
   </main>
+
+
+  <script>
+    <?php if ($_SESSION['role'] == 'organization') { ?>
+    let openModalButtons = document.querySelectorAll('[data-modal-target]')
+    let closeModalButtons = document.querySelectorAll('[data-close-button]')
+    const overlay = document.getElementById('overlay')
+
+    openModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget)
+        // document.getElementById("user_username").value = button.innerText.split(' ')[0]
+        document.getElementById("user_username").value = button.dataset.username
+        openModal(modal)
+      })
+    })
+
+    overlay.addEventListener('click', () => {
+      const modals = document.querySelectorAll('.modal.active')
+      modals.forEach(modal => {
+        closeModal(modal)
+      })
+    })
+
+    closeModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+      })
+    })
+
+    function openModal(modal) {
+      if (modal == null) return
+      modal.classList.add('active')
+      overlay.classList.add('active')
+    }
+
+    function closeModal(modal) {
+      if (modal == null) return
+      modal.classList.remove('active')
+      overlay.classList.remove('active')
+    }
+    <?php } ?>
+  </script>
 </body>
 </html>
